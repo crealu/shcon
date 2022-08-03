@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Kosugi+Maru|M+PLUS+1p|Noto+Serif+JP|Sarabun|Sawarabi+Mincho&display=swap|Noto+Sans+JP|M+PLUS+Rounded+1c|Sawarabi+Gothic');
+
+body {
+  margin: 0px;
+  font-family: 'Nunito';
+  background: black;
+}
+
+p {
+  position: absolute;
+  color: white;
+  font-size: 28px;
+  text-align: center;
+  left: 0px;
+  right: 0px;
+  margin: 0px;
+  padding: 20px;
+  letter-spacing: 2px;
+}
+
+input {
+  position: relative;
+  display: block;
+}
