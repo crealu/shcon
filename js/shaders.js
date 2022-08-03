@@ -51,7 +51,7 @@ vec2 rotateTilePattern(vec2 _st) {
     } else if (index == 2.0) {
         _st = rotate2D(_st, PI * val);
     } else if (index == 3.0) {
-        _st = rotate2D(_st, PI * val/2.0);
+        _st = rotate2D(_st, PI * val/3.0);
     }
 
     return _st;
