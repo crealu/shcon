@@ -1,29 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sparkle Ring</title>
-  <link href="style.css" type="text/css" rel="stylesheet">
-  <style type="text/css">
-    #canvas {
-      position: relative;
-      width: 600px;
-      height: 900px;
-      display: block;
-      top: 10vh;
-      z-index: 1;
-      margin: 0 auto;
-    }
-  </style>
-</head>
-<body>
-  <p>Sparkle Ring</p>
-  <canvas id="canvas" height="700" width="900"></canvas>
-  <input type="range" step="0.01" min="-1.0" max="1.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
-  <script src="js/shaders.js"></script>
-  <script src="js/setup.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <title>Sparkle Ring</title>
+    <script type="text/x-vertex-shader" id="particle-update-vert">
+      #version 300 es
+      precision mediump float;
+
+      uniform float u_TimeDelta;
+      uniform sampler2D u_RgNoise;
+      uniform vec2 u_Gravity;
+      uniform vec2 u_Origin;
+      uniform float u_MinTheta;
+      uniform float u_MaxTheta;
+      uniform float u_MinSpeed;
+      uniform float u_MaxSpeed;
+
+      in vec2 i_Position;
+      in float i_Age;
+      in float i_Life;
+      in vec2 i_Velocity;
+
+      out vec2 v_Position;
+      out float v_Age;
+      out float v_Life;
+      out vec2 v_Velocity;
+
+      void main() {
+        if (i_Age >= i_Life) {
+          ivec2 noise_coord = ivec2(gl_VertexID % 512, gl_VertexID / 512);
+          vec2 rand = texelFetch(u_RgNoise, noise_coord, 0).rg;
+          float theta = u_MinTheta + rand.r*(u_MaxTheta - u_MinTheta);
+          float x = cos(theta);
+          float y = sin(theta);
+          v_Position = u_Origin;
+          v_Age = 0.0;
+          v_Life = i_Life;
+          v_Velocity =
+            vec2(x, y) * (u_MinSpeed + rand.g * (u_MaxSpeed - u_MinSpeed));
+        } else {
+          v_Position = i_Position + i_Velocity * u_TimeDelta;
+          v_Age = i_Age + u_TimeDelta;
+          v_Life = i_Life;
+          v_Velocity = i_Velocity + u_Gravity * u_TimeDelta;
+        }
+      }
+    </script>
+    <script type="text/x-fragment-shader" id="passthru-frag-shader">
+      #version 300 es
+      precision mediump float;
+      in float v_Age;
+      void main() { discard; }
+    </script>
+    <script type="text/x-vertex-shader" id="particle-render-vert">
+      #version 300 es
+      precision mediump float;
+
+      in vec2 i_Position;
+
+      void main() {
+        gl_PointSize = 1.0;
+        gl_Position = vec4(i_Position, 0.0, 1.0);
+      }
+    </script>
+    <script type="text/x-fragment-shader" id="particle-render-frag">
+      #version 300 es
+      precision mediump float;
+
+      out vec4 o_FragColor;
+
+      void main() {
+        o_FragColor = vec4(1.0);
+      }
+    </script>
+  </head>
+  <body onload="main()" style="text-align:center"></body>
+  <script src="js/mainc.js" type="text/javascript"></script>
 </html>

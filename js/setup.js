@@ -3,6 +3,7 @@ gl = canvas.getContext('webgl');
 
 let inp = document.querySelector('input');
 
+
 let posOffset = 0;
 let vertexNum = 4;
 
