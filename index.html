@@ -2,6 +2,9 @@
 <html>
   <head>
     <title>Sparkle Ring</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" type="text/css" rel="stylesheet">
     <script type="text/x-vertex-shader" id="particle-update-vert">
       #version 300 es
       precision mediump float;
@@ -69,10 +72,10 @@
       out vec4 o_FragColor;
 
       void main() {
-        o_FragColor = vec4(1.0);
+        o_FragColor = vec4(1.0, 0.5, 0.5, 1.0);
       }
     </script>
   </head>
-  <body onload="main()" style="text-align:center"></body>
+  <body></body>
   <script src="js/mainc.js" type="text/javascript"></script>
 </html>
