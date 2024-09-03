@@ -1,21 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Kosugi+Maru|M+PLUS+1p|Noto+Serif+JP|Sarabun|Sawarabi+Mincho&display=swap|Noto+Sans+JP|M+PLUS+Rounded+1c|Sawarabi+Gothic');
 
 body {
-  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0px;
-  font-family: 'Nunito';
+  margin: 0px;
   background: black;
+  font-family: 'Nunito';
   overflow: hidden;
 }
 
 #canvas {
   position: absolute;
+  display: block;
   width: 100vw;
   height: 100vh;
-  display: block;
   top: 0vh;
-  z-index: 1;
   margin: 0 auto;
+  z-index: 1;
+}
+
+button {
+  position: absolute;
+  color: white;
+  display: block;
+  text-align: center;
+  background: none;
+  border: none;
+  margin: 0 auto;
+  font-size: 40px;
 }
 
 p {
