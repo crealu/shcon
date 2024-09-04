@@ -1,29 +1,82 @@
-let shaderProgram, buffers;
-const theVS = vertShader;
-const theFS = fragShader;
+const canvas = document.getElementById('the-canvas');
+const iku = document.getElementById('iku');
 
-shaderProgram = initShaderProgram(gl, theVS, theFS);
-buffers = initBuffers(gl);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-setupProgram(gl, shaderProgram, buffers);
-drawScene(gl, shaderProgram, buffers, 0.0);
+let gl = canvas.getContext('webgl');
+let time = 0.0;
+const timeLimit = 12;
+let id;
 
-// const uniformLocProjection = gl.getUniformLocation(shaderProgram, 'projection');
-// const uniformLocView = gl.getUniformLocation(shaderProgram, 'projection');
-// const uniformLocCTime = gl.getUniformLocation(shaderProgram, 'ctime');
+function loadShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
 
-let then = 0.0;
-let raf;
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    gl.deleteShader(shader);
+    return null;
+  }
+
+  return shader;
+}
+
+const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vs);
+const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fs);
+
+const shaderProgram = gl.createProgram();
+gl.attachShader(shaderProgram, vertexShader);
+gl.attachShader(shaderProgram, fragmentShader);
+gl.linkProgram(shaderProgram);
+gl.useProgram(shaderProgram);
+
+const positionBuffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 3, 3, -1]), gl.STATIC_DRAW);
+
+const positionLocation = gl.getAttribLocation(shaderProgram, "a_position");
+gl.enableVertexAttribArray(positionLocation);
+gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution');
+gl.uniform3f(uResolution, canvas.width, canvas.height, 1.0);
+
+const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+gl.uniform1f(uTime, time);
+
+gl.clearColor(0.0, 0.0, 0.0, 1.0);
+gl.clearDepth(1.0);
+gl.enable(gl.DEPTH_TEST);
+gl.depthFunc(gl.LEQUAL);
+
 function render(now) {
-  now *= 0.001;
-  const deltaTime = now - then;
+  time += 0.01;
+  
+  gl.uniform1f(uTime, time);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
 
-  if (deltaTime >= 12.57) {
+  if (time >= timeLimit) {
     window.cancelAnimationFrame(render);
     return;
   }
 
-  drawScene(gl, shaderProgram, buffers, deltaTime);
-  raf = window.requestAnimationFrame(render);
+  id = window.requestAnimationFrame(render);
 }
-raf = window.requestAnimationFrame(render);
+
+function pause() {
+  window.cancelAnimationFrame(id);
+}
+
+iku.addEventListener('click', () => {
+  iku.style.display = 'none';
+  render();
+})
+
+window.addEventListener('keypress', (event) => {
+  if (event.key == 'j') {
+    render();
+  } else if (event.key == 'p') {
+    pause();
+  }
+})
