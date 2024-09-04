@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
 	res.sendFile('index.html', root);
 });
 
+app.get('/get-shaders', (req, res) => {
+	res.sendFile('shaders/01/both.glsl', root);
+});
+
 app.listen(port, () => { 
 	console.log(`listening on ${port}`)
 });
