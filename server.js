@@ -1,5 +1,5 @@
 const express = require('express');
-const port = 9800 || process.env.PORT;
+const port = process.env.PORT || 9800;
 const app = express();
 
 app.use(express.static(__dirname));
