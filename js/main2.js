@@ -132,7 +132,8 @@ function pause() {
 
 iku.addEventListener('click', () => {
   iku.style.opacity = '0';
-  canvas.style.opacity = '1';
+  canvas1.style.opacity = '1';
+  canvas2.style.opacity = '1';
   render();
 })
 

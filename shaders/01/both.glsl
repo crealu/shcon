@@ -36,7 +36,7 @@ void main() {
   vec3 finalColor = vec3(0.0);
 
   for (float i = 0.0; i < 4.0; i++) {
-    uv = fract(uv * 0.5) - 0.5;
+    uv = fract(uv * 1.5) - 0.5;
 
     float d = length(uv) * exp(-length(uv0));
     vec3 col = palette(length(uv0) + i * 0.4 + u_time * 0.4);
@@ -79,7 +79,7 @@ void main() {
   vec3 finalColor = vec3(0.0);
 
   for (float i = 0.0; i < 4.0; i++) {
-    uv = fract(uv * 0.5) - 0.5;
+    uv = fract(uv * 1.5) - 0.5;
 
     float d = length(uv) * exp(-length(uv0));
     vec3 col = palette(length(uv0) + i * 0.4 + u_time * 0.4);
