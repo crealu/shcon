@@ -28,8 +28,6 @@ async function fetchShaders() {
     .catch(err => { console.log(err) })
 }
 
-fetchShaders();
-
 function loadShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -65,7 +63,7 @@ function initBuffers() {
 function initLocation() {
   const positionLocation = gl.getAttribLocation(theProgram, "a_position");
   gl.enableVertexAttribArray(positionLocation);
-  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+  gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);  
 }
 
 function initUniforms() {
@@ -94,7 +92,7 @@ function render(now) {
   time += 0.01;
   
   gl.uniform1f(uniformTime, time);
-  gl.drawArrays(gl.TRIANGLES, 0, 3);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);  
 
   if (time >= timeLimit) {
     window.cancelAnimationFrame(render);
@@ -120,4 +118,8 @@ window.addEventListener('keypress', (event) => {
   } else if (event.key == 'p') {
     pause();
   }
+})
+
+window.addEventListener('load', () => {
+  fetchShaders();;
 })

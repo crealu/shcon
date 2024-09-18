@@ -11,25 +11,30 @@ body {
   overflow: hidden;
 }
 
-/*
-
-#canvas {
-  position: absolute;
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  top: 0vh;
+.cnv-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
-  z-index: 1;
-  transition: 0.3s ease;
-  opacity: 0;
+  width: 400px;
+  height: 400px;
+  top: calc(50vh - 200px);
 }
 
-*/
+.a-canvas {
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  border-radius: 50%;
+  border: 5px solid #ffffff;
+  box-shadow: 0 0 14px 8px rgb(255 255 255);
+}
 
 #the-canvas {
   opacity: 0;
   transition: 0.3s ease;
+  display: none;
 }
 
 button {
