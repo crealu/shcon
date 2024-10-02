@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Kosugi+Maru|M+PLUS+1p|Noto+Serif+JP|Sarabun|Sawarabi+Mincho&display=swap|Noto+Sans+JP|M+PLUS+Rounded+1c|Sawarabi+Gothic');
 
+:root {
+  --cb-1: cubic-bezier(.29,.7,.41,.95);
+  --cb-2: cubic-bezier(.3,.91,.8,.84);
+  --cb-3: cubic-bezier(.79,.15,.69,.92);
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -10,6 +16,103 @@ body {
   font-family: 'Nunito';
   overflow: hidden;
 }
+
+.foreground {
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  left: 0px;
+  right: 0px;
+  top: calc(50vh - 100px);
+  border-radius: 50%;
+/*  border: 1px solid white;*/
+/*  background: black;*/
+  z-index: 10;
+}
+
+#iku {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: calc(50% - 10px);
+  margin: 0 auto;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  display: block;
+  opacity: 1;
+  transition: 0.3s ease;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.ikur {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: calc(50% - 30px);
+  margin: 0 auto;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 32px;
+  text-align: center;
+  display: none;
+  opacity: 0;
+  transition: top 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
+}
+
+.slide-up {
+  display: block;
+  animation: 0.5s var(--cb-1) 0s upslide 1 forwards;
+}
+
+@keyframes upslide {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0px, -40px);
+  }
+}
+
+.background {
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+  left: 0px;
+  right: 0px;
+  top: calc(50vh - 150px);
+  border-radius: 50%;
+/*  border: 1px solid white;*/
+  background: black;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.the-canvas {
+  position: absolute;
+  transform: translate(-25%, -25%);
+  opacity: 0;
+  display: none;
+  transition: opacity 0.5s var(--cb-2);
+  z-index: 2;
+}
+
+.reveal {
+  opacity: 1;
+}
+
 
 .cnv-wrapper {
   position: relative;
@@ -29,9 +132,9 @@ body {
   height: 100px;
   margin: 20px;
   border-radius: 50%;
-  box-shadow: 0 0 30px 0px rgb(255 243 243);
+  box-shadow: 0 0 0px 0px rgb(255 243 243);
   animation: 4s ease 0s levitate 3;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
 }
 
@@ -42,6 +145,7 @@ body {
 
   50% {
     transform: translate(0px, -40px);
+    box-shadow: 0 0 30px 0px rgb(255 243 243);
   }
 
   100% {
@@ -49,27 +153,7 @@ body {
   }
 }
 
-#the-canvas {
-  opacity: 0;
-  transition: 0.3s ease;
-  display: none;
-}
-
-button {
-  position: absolute;
-  color: white;
-  display: block;
-  text-align: center;
-  background: none;
-  border: none;
-  margin: 0 auto;
-  font-size: 40px;
-  transition: 0.3s ease;
-  opacity: 1;
-  z-index: 10;
-}
-
-p {
+/*p {
   position: absolute;
   color: red;
   font-size: 28px;
@@ -80,7 +164,7 @@ p {
   padding: 20px;
   letter-spacing: 2px;
   z-index: 10;
-}
+}*/
 
 input {
   position: relative;

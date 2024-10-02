@@ -1,5 +1,6 @@
-const canvas = document.getElementById('the-canvas');
+const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
+const ikur = document.getElementsByClassName('ikur')[0];
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -107,8 +108,13 @@ function pause() {
 }
 
 iku.addEventListener('click', () => {
-  iku.style.opacity = '0';
-  canvas.style.opacity = '1';
+  // iku.style.opacity = '0';
+  ikur.classList.add('slide-up');
+  canvas.style.display = 'block';
+  setTimeout(() => {
+    canvas.style.display = '1';
+    canvas.classList.add('reveal');
+  }, 500);
   render();
 })
 

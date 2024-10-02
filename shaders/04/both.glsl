@@ -35,6 +35,7 @@ vec3 eclipse(vec2 f, vec3 c, float q) {
 
     for (int i = 0; i < 5; i++) {
         float circle = length(f) - radius;
+        circle /= 0.5;
         float x = sin((float(i) / speed) * u_time);
         float y = cos((float(i) / speed) * u_time);
         vec2 offset = setOffset(q, x, y);
