@@ -4,6 +4,8 @@
   --cb-1: cubic-bezier(.29,.7,.41,.95);
   --cb-2: cubic-bezier(.3,.91,.8,.84);
   --cb-3: cubic-bezier(.79,.15,.69,.92);
+  --cb-4: cubic-bezier(.16,.51,.98,.84);
+  --cb-5: cubic-bezier(.34,.53,.83,.7);
 }
 
 body {
@@ -67,6 +69,29 @@ body {
   z-index: 10;
 }
 
+.active-reading {
+/*  border: 1px solid rgba(255, 255, 255, 1);*/
+  text-shadow: #fff 0px 0px 0px;
+  transform: translate(0, -40px);
+  opacity: 1;
+  display: block;
+  animation: 1.5s ease-in-out 0s glow infinite;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: #fff 0px 0px 0px;
+  }
+
+  40% {
+    text-shadow: #fff 0px 0px 10px;
+  }
+
+  100% {
+    text-shadow: #fff 0px 0px 0px;
+  }
+}
+
 .slide-up {
   display: block;
   animation: 0.5s var(--cb-1) 0s upslide 1 forwards;
@@ -101,18 +126,34 @@ body {
 }
 
 .the-canvas {
-  position: absolute;
-  transform: translate(-25%, -25%);
+/*  position: absolute;*/
+/*  transform: translate(-25%, -25%);*/
   opacity: 0;
-  display: none;
-  transition: opacity 0.5s var(--cb-2);
+  display: block;
+  transition: opacity 0.75s var(--cb-2);
   z-index: 2;
+  clip-path: circle(0%);
 }
 
 .reveal {
+  clip-path: circle(0%);
+  animation: 2s var(--cb-4) 0s toggle-clip 1 forwards;
   opacity: 1;
 }
 
+@keyframes toggle-clip {
+  0% {
+    clip-path: circle(0%);
+  }
+
+  60% {
+    clip-path: circle(30%);
+  }
+
+  100% {
+    clip-path: circle(0%);
+  }
+}
 
 .cnv-wrapper {
   position: relative;
