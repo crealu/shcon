@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/get-shaders', (req, res) => {
-	res.sendFile('shaders/05/both.glsl', root);
+	res.sendFile('shaders/06/both.glsl', root);
 });
 
 app.listen(port, () => { 

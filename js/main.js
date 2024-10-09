@@ -112,16 +112,16 @@ iku.addEventListener('click', () => {
   canvas.style.display = 'block';
   canvas.classList.add('reveal');
 
-  setTimeout(() => {
-    ikur.classList.add('slide-up');
-    setTimeout(() => {
-      // ikur.style.animation = null;
-      ikur.classList.add('active-reading');
-      ikur.classList.remove('slide-up');
-      // setTimeout(())
-    }, 500);
-    // canvas.style.display = '1';
-  }, 500);
+  // setTimeout(() => {
+  //   ikur.classList.add('slide-up');
+  //   setTimeout(() => {
+  //     // ikur.style.animation = null;
+  //     ikur.classList.add('active-reading');
+  //     ikur.classList.remove('slide-up');
+  //     // setTimeout(())
+  //   }, 500);
+  //   // canvas.style.display = '1';
+  // }, 500);
   render();
 })
 

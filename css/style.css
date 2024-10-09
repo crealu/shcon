@@ -132,12 +132,12 @@ body {
   display: block;
   transition: opacity 0.75s var(--cb-2);
   z-index: 2;
-  clip-path: circle(0%);
+  clip-path: circle(100%);
 }
 
 .reveal {
-  clip-path: circle(0%);
-  animation: 2s var(--cb-4) 0s toggle-clip 1 forwards;
+/*  clip-path: circle(0%);*/
+/*  animation: 2s var(--cb-4) 0s toggle-clip 1 forwards;*/
   opacity: 1;
 }
 
