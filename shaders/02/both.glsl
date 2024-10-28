@@ -25,8 +25,8 @@ vec2 translate(float time) {
 }
 
 vec3 theme() {
-  vec3 c1 = vec3(0.0, 0.0, 0.5);
-  vec3 c2 = vec3(0.6, 0.0, 0.3);
+  vec3 c1 = vec3(0.9, 0.0, 0.0);
+  vec3 c2 = vec3(1.0, 1.0, 1.0);
 
   return c1 + cos(3.14 * c2);
 }
@@ -43,17 +43,16 @@ void main() {
   // field -= center;
   // field -= tlt;
 
-
   float dia = length(field);
 
-  vec3 color = vec3(0.0, 0.0, 1.0);
+  vec3 color = vec3(1.0, 1.0, 1.0);
 
   for (float i = 0.0; i < 4.0; i++) {
     field = fract(field * 1.1) - 0.5;
 
     dia = length(field) * exp(-length(field0));
 
-    vec3 col = vec3(0.4, 0.1, 0.8);
+    vec3 col = vec3(0.0, 0.0, 0.5);
     col += theme();
     col -= smoothstep(0.1, 0.2 / tlt.x, dia);
 
@@ -63,7 +62,6 @@ void main() {
 
     color += col * dia;
   }
-
 
   gl_FragColor = vec4(color, 1.0);
 }

@@ -135,10 +135,24 @@ body {
   clip-path: circle(100%);
 }
 
+.next-canvas {
+  /*  position: absolute;*/
+/*  transform: translate(-25%, -25%);*/
+  opacity: 0;
+  display: block;
+  transition: opacity 0.75s var(--cb-2);
+  z-index: 2;
+  clip-path: circle(100%);
+}
+
 .reveal {
 /*  clip-path: circle(0%);*/
 /*  animation: 2s var(--cb-4) 0s toggle-clip 1 forwards;*/
   opacity: 1;
+}
+
+.vanish {
+  opacity: 0;
 }
 
 @keyframes toggle-clip {

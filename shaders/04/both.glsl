@@ -21,7 +21,7 @@ vec2 setOffset(float q, float x, float y) {
     else if (q == 2.0)
         offset = vec2(-x, y);
     else if (q == 3.0)
-        offset = vec2(x, -y);
+        offset = vec2(x, -y * 2.0);
     else if (q == 4.0)
         offset = vec2(-x, -y);
 
