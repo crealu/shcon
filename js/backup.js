@@ -2,7 +2,7 @@ const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
 const ikur = document.getElementsByClassName('ikur')[0];
 
-iku.style.display = 'none';
+// iku.style.display = 'none';
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -147,33 +147,24 @@ function pause() {
   window.cancelAnimationFrame(id);
 }
 
-iku.addEventListener('click', () => {
-  // iku.style.opacity = '0';
+
+function handleClick() {
+  iku.style.opacity = '0';
   canvas.style.display = 'block';
   canvas.classList.add('reveal');
 
-  // setTimeout(() => {
-  //   ikur.classList.add('slide-up');
-  //   setTimeout(() => {
-  //     // ikur.style.animation = null;
-  //     ikur.classList.add('active-reading');
-  //     ikur.classList.remove('slide-up');
-  //     // setTimeout(())
-  //   }, 500);
-  //   // canvas.style.display = '1';
-  // }, 500);
+  setTimeout(() => {
+    // ikur.classList.add('slide-up');
+    setTimeout(() => {
+      // ikur.style.animation = null;
+      // ikur.classList.add('active-reading');
+      // ikur.classList.remove('slide-up');
+      // setTimeout(())
+    }, 500);
+    // canvas.style.display = '1';
+  }, 500);
   render();
-})
-
-window.addEventListener('keypress', (event) => {
-  if (event.key == 'j') {
-    canvas.style.display = 'block';
-    canvas.classList.add('reveal');
-    render();
-  } else if (event.key == 'p') {
-    pause();
-  }
-})
+}
 
 function displayCanvas() {    
   canvas.style.display = 'block';
@@ -181,9 +172,18 @@ function displayCanvas() {
   render();
 }
 
-window.addEventListener('load', () => {
+function handleLoad() {
   fetchShaders();
-  setTimeout(() => {
+}
+
+function handleKeyPress(event) {
+  if (event.key == 'j') {
     displayCanvas();
-  }, 1000)
-})
+  } else if (event.key == 'p') {
+    pause();
+  }
+}
+
+iku.addEventListener('click', handleClick);
+window.addEventListener('load', handleLoad);
+window.addEventListener('load', handleKeyPress);
