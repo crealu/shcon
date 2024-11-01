@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
 	res.sendFile('index.html', root);
 });
 
+app.get('/random', (req, res) => {
+	res.sendFile('random.html', root);
+});
+
 app.get('/get-shaders', (req, res) => {
 	res.sendFile('shaders/01/both.glsl', root);
 	// res.sendFile('shaders/04/both.glsl', root);
