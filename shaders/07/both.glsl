@@ -1,9 +1,8 @@
-precision highp float;
-
+precision mediump float;
 attribute vec4 a_position;
 
 void main() {
-    gl_Position = a_position;
+  gl_Position = a_position * 10.0;
 }
 
 //**
@@ -12,62 +11,53 @@ precision mediump float;
 
 uniform vec3 u_resolution;
 uniform float u_time;
-uniform float u_moon;
 
-vec2 setOffset(float q, float x, float y) {
-    vec2 offset = vec2(0.0);
+vec3 palette(float t) {
+  vec3 a = vec3(163.0/255.0, 211.0/255.0, 240.0/255.0);
+  vec3 b = vec3(75.0/255.0, 159.0/255.0, 130.0/255.0);
+  vec3 c = vec3(235.0/255.0, 187.0/255.0, 97.0/255.0);
+  vec3 d = vec3(0.563, 0.816, 0.457);
 
-    if (q == 1.0)
-        offset = vec2(x, y);
-    else if (q == 2.0)
-        offset = vec2(-x, y);
-    else if (q == 3.0)
-        offset = vec2(x, -y);
-    else if (q == 4.0)
-        offset = vec2(-x, -y);
-    else if (q == 5.0)  // Extra offset
-        offset = vec2(0.0, -y);
-
-    return offset;
+  // return a + b * cos(3.14 * (c * t + d));
+  return a + b * cos(6.28318 * (c * t + d));
 }
 
-vec3 eclipse(vec2 f, vec3 c, float q) {
-    float radius = 0.1;
-    float speed = 10.0;
-    float br = 0.01;
-
-    for (int i = 0; i < 6; i++) {
-        float circle = length(f) - radius;
-        float x = sin((float(i) / speed) * u_time);
-        float y = cos((float(i) / speed) * u_time);
-        vec2 offset = setOffset(q, x, y);
-        circle = fract(circle) * 5.0;
-        f += offset;
-        c /= circle;
-    }
-
-    return c;
+float circle(vec2 st, float radius) {
+  return step(radius * 0.01, dot(st, st) * 3.0);
 }
 
 void main() {
-    vec2 view = 2.0 * gl_FragCoord.xy - u_resolution.xy;
-    float axis = u_resolution.y;
-    vec2 field = view / axis;
-    vec2 field0 = field;
+  vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / u_resolution.y;
+  vec2 uv0 = uv;
+  vec3 color = vec3(0.0);
+  float speed = 0.1;
+  float x = 0.9 * sin(speed * u_time);
+  float y = -0.9 * cos(speed * u_time);
+  vec2 translate = vec2(x, y);
 
-    vec3 color = vec3(
-        0.9,
-        abs(0.55 - sin(u_time) / 2.0),
-        abs(0.55 - cos(u_time) / 2.0)
-    );
+  for (float i = 0.0; i < 4.0; i++) {
+    float sign = sin(speed * u_time);
 
-    color = eclipse(field, color, 1.0);
-    color = eclipse(field0, color, 2.0);
-    color = eclipse(field0, color, 3.0);
-    color = eclipse(field0, color, 4.0);
-    color = eclipse(field0, color, 5.0);  // Extra eclipse pass
+    if (sign > 0.0) {
+      uv /= sign;
+    } else {
+      uv /= sign;
+    }
+    
+    uv += translate;
+    uv = fract(uv) - 0.5;
 
-    gl_FragColor = vec4(color, 1.0);
+    float d = length(uv) * exp(-length(uv0));
+    vec3 col = palette(length(uv0) + i * 0.2 + u_time * 0.4);
+
+    d = sin(d * 8.0 + u_time) / 8.0;
+    d = abs(d);
+    d = pow(0.005 / d, 1.2);
+    
+    color += col * d;
+  }
+
+  gl_FragColor = vec4(color, 1.0);
 }
 
 

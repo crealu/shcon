@@ -16,9 +16,8 @@ app.get('/random', (req, res) => {
 	res.sendFile('random.html', root);
 });
 
-app.get('/get-shaders', (req, res) => {
-	res.sendFile('shaders/01/both.glsl', root);
-	// res.sendFile('shaders/04/both.glsl', root);
+app.post('/one-shader', (req, res) => {
+	res.sendFile('shaders/07/both.glsl', root);
 });
 
 app.post('/shaders', (req, res) => {

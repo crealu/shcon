@@ -58,15 +58,11 @@ async function fetchShaders() {
     body: JSON.stringify(data)
   }
 
-  await fetch('/shaders', options)
+  await fetch('/one-shader', options)
     .then(res => res.text())
-    .then(data => {
-      parseBoth(data) 
-      // parseAll(data);
-    })
+    .then(data => { parseBoth(data) })
     .catch(err => { console.log(err) })
 }
-
 
 function loadShader(gl, type, source) {
   const shader = gl.createShader(type);
@@ -186,4 +182,4 @@ function handleKeyPress(event) {
 
 iku.addEventListener('click', handleClick);
 window.addEventListener('load', handleLoad);
-window.addEventListener('load', handleKeyPress);
+window.addEventListener('keydown', handleKeyPress);
