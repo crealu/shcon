@@ -140,7 +140,7 @@ function handleLoad() {
   }, 1000)
 }
 
-function handleKeyPress(event) {
+function handleKeyDown(event) {
   if (event.key == 'j') {
     render();
   } else if (event.key == 'p') {
@@ -149,4 +149,4 @@ function handleKeyPress(event) {
 }
 
 window.addEventListener('load', handleLoad);
-window.addEventListener('load', handleKeyPress);
+window.addEventListener('keydown', handleKeyDown);

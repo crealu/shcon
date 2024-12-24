@@ -21,11 +21,19 @@ let vs, fs;
 function parseBoth(text) {
   let shaders = text.split('//**');
   start1(shaders[0], shaders[1]);
-  start2(shaders[0], shaders[2]);
+  start2(shaders[0], shaders[1]);
 }
 
 async function fetchShaders() {
-  await fetch('/get-shaders')
+  const data = { n: 7 };
+
+  const options = {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},    
+    body: JSON.stringify(data)
+  }
+
+  await fetch('/one-shader', options)
     .then(res => res.text())
     .then(data => { parseBoth(data) })
     .catch(err => { console.log(err) })
