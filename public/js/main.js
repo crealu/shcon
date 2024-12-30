@@ -1,21 +1,16 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
-const canvas1 = document.getElementsByClassName('next-canvas')[0];
 const iku = document.getElementById('iku');
 const ikur = document.getElementsByClassName('ikur')[0];
 
-iku.style.display = 'none';
+// iku.style.display = 'none';
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-canvas1.width = window.innerWidth;
-canvas1.height = window.innerHeight;
-
 let gl = canvas.getContext('webgl');
-let gl1 = canvas1.getContext('webgl');
-let overallTime = 0.0, shaderTime = 0.0;
+let time = 0.0;
 const timeLimit = 12;
-let uniformTime;
+let uniformTime, shaderTime;
 let id, nextId;
 let theProgram, nextProgram;
 let vs, fs, vsn, fsn;
@@ -39,7 +34,7 @@ function parseAll(text) {
 
   vs = programs[0][0]
   fs = programs[0][1];
-  start(gl, vs, fs);
+  start(vs, fs);
 
   console.log(programs);
 
@@ -47,13 +42,25 @@ function parseAll(text) {
   // start(shaders[0], shaders[1]);
 }
 
+function randomIntFromRange(min, max) {
+  return Math.floor(Math.random() * (max - min * 1) + min);
+}
+
 async function fetchShaders() {
-  await fetch('/get-shaders')
+  let number = randomIntFromRange(1, 8);
+  console.log(number)
+
+  let data = {n: number}
+
+  const options = {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},    
+    body: JSON.stringify(data)
+  }
+
+  await fetch('/one-shader', options)
     .then(res => res.text())
-    .then(data => { 
-      parseBoth(data) 
-      parseAll(data);
-    })
+    .then(data => { parseBoth(data) })
     .catch(err => { console.log(err) })
 }
 
@@ -70,7 +77,7 @@ function loadShader(gl, type, source) {
   return shader;
 }
 
-function initShaderProgram(gl, vsSource, fsSource) {
+function initShaderProgram(vsSource, fsSource) {
   const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
   const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
   
@@ -83,19 +90,19 @@ function initShaderProgram(gl, vsSource, fsSource) {
   return shaderProgram;
 }
 
-function initBuffers(gl) {
+function initBuffers() {
   const positionBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 3, 3, -1]), gl.STATIC_DRAW);
 }
 
-function initLocation(gl) {
+function initLocation() {
   const positionLocation = gl.getAttribLocation(theProgram, "a_position");
   gl.enableVertexAttribArray(positionLocation);
   gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);  
 }
 
-function initUniforms(gl) {
+function initUniforms() {
   const uResolution = gl.getUniformLocation(theProgram, 'u_resolution');
   gl.uniform3f(uResolution, canvas.width, canvas.height, 1.0);
 
@@ -105,109 +112,73 @@ function initUniforms(gl) {
   return uTime;
 }
 
-function start(gl, theVS, theFS) {
-  theProgram = initShaderProgram(gl, theVS, theFS);
-  initBuffers(gl);
-  initLocation(gl);
-  uniformTime = initUniforms(gl);
+function start(theVS, theFS) {
+  theProgram = initShaderProgram(theVS, theFS);
+  initBuffers();
+  initLocation();
+  uniformTime = initUniforms();
 }
 
-function clear(gl) {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clearDepth(1.0);
-  gl.enable(gl.DEPTH_TEST);
-  gl.depthFunc(gl.LEQUAL);
-}
-
-// gl.clearColor(0.0, 0.0, 0.0, 1.0);
-// gl.clearDepth(1.0);
-// gl.enable(gl.DEPTH_TEST);
-// gl.depthFunc(gl.LEQUAL);
-
-clear(gl);
-
-let step = 10;
-
-function swapCanvas() {
-  canvas.classList.add('vanish');
-  canvas1.classList.add('reveal');
-  start(gl1, programs[1][0], programs[1][1]);
-  renderNext();
-}
+gl.clearColor(0.0, 0.0, 0.0, 1.0);
+gl.clearDepth(1.0);
+gl.enable(gl.DEPTH_TEST);
+gl.depthFunc(gl.LEQUAL);
 
 function render(now) {
-  shaderTime += 0.01;
-  overAllTime += shaderTime;
+  time += 0.01;
   
-  gl.uniform1f(uniformTime, shaderTime);
+  gl.uniform1f(uniformTime, time);
   gl.drawArrays(gl.TRIANGLES, 0, 3);  
 
-  if (overalltime >= step) {
-    shaderTime = 0.0;
-    swapCanvas();
-    // renderNext();
-  }
-
-  if (shaderTime >= timeLimit) {
+  if (time >= timeLimit) {
     window.cancelAnimationFrame(render);
+    window.location.reload();
     return;
   }
 
   id = window.requestAnimationFrame(render);
 }
 
-function renderNext(now) {
-  shaderTime += 0.01;
-  overAllTime += shaderTime;
-  
-  gl1.uniform1f(uniformTime, shaderTime);
-  gl1.drawArrays(gl1.TRIANGLES, 0, 3);  
-
-  if (overalltime >= step) {
-    swapCanvas();
-    renderNext();
-  }
-
-  if (shaderTime >= timeLimit) {
-    window.cancelAnimationFrame(renderNext);
-    return;
-  }
-
-  nextId = window.requestAnimationFrame(renderNext);
-}
-
 function pause() {
   window.cancelAnimationFrame(id);
 }
 
-iku.addEventListener('click', () => {
-  // iku.style.opacity = '0';
+function handleClick() {
+  iku.style.opacity = '0';
   canvas.style.display = 'block';
   canvas.classList.add('reveal');
 
-  // setTimeout(() => {
-  //   ikur.classList.add('slide-up');
-  //   setTimeout(() => {
-  //     // ikur.style.animation = null;
-  //     ikur.classList.add('active-reading');
-  //     ikur.classList.remove('slide-up');
-  //     // setTimeout(())
-  //   }, 500);
-  //   // canvas.style.display = '1';
-  // }, 500);
+  setTimeout(() => {
+    // ikur.classList.add('slide-up');
+    setTimeout(() => {
+      // ikur.style.animation = null;
+      // ikur.classList.add('active-reading');
+      // ikur.classList.remove('slide-up');
+      // setTimeout(())
+    }, 500);
+    // canvas.style.display = '1';
+  }, 500);
   render();
-})
+}
 
-window.addEventListener('keypress', (event) => {
+function displayCanvas() {    
+  canvas.style.display = 'block';
+  canvas.classList.add('reveal');
+  render();
+}
+
+function handleLoad() {
+  fetchShaders();
+}
+
+function handleKeyPress(event) {
   if (event.key == 'j') {
-    canvas.style.display = 'block';
-    canvas.classList.add('reveal');
-    render();
+    displayCanvas();
   } else if (event.key == 'p') {
     pause();
   }
-})
+}
 
-window.addEventListener('load', () => {
-  fetchShaders();;
-})
+iku.addEventListener('click', handleClick);
+window.addEventListener('load', handleLoad);
+window.addEventListener('keydown', handleKeyPress);

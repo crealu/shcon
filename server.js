@@ -16,15 +16,24 @@ app.get('/random', (req, res) => {
 	res.sendFile('random.html', root);
 });
 
+app.get('/dos', (req, res) => {
+	res.sendFile('dos.html', root);
+});
+
+app.get('/mouse', (req, res) => {
+	res.sendFile('mouse.html', root);
+});
+
+app.post('/mouse-shaders', (req, res) => {
+	res.sendFile('shaders/09/both.glsl', root);
+});
+
 app.post('/one-shader', (req, res) => {
-	res.sendFile('shaders/07/both.glsl', root);
+	res.sendFile('shaders/08/both.glsl', root);
 });
 
 app.post('/shaders', (req, res) => {
-	let n = req.body.n;
-	res.sendFile('shaders/0' + n + '/both.glsl', root);
-})
-
-app.listen(port, () => { 
-	console.log(`listening on ${port}`)
+	res.sendFile('shaders/0' + req.body.n + '/both.glsl', root);
 });
+
+app.listen(port, () => { console.log(`listening on ${port}`) });
