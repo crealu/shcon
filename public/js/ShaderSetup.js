@@ -19,8 +19,8 @@ class ShaderSetup {
 		this.fs = loadShader(this.gl, this.gl.FRAGMENT_SHADER, fsSource);
 
 		const shaderProgram = this.gl.createProgram();
-		this.gl.attachShader(shaderProgram, vertexShader);
-		this.gl.attachShader(shaderProgram, fragmentShader);
+		this.gl.attachShader(shaderProgram, this.vs);
+		this.gl.attachShader(shaderProgram, this.fs);
 		this.gl.linkProgram(shaderProgram);
 		this.gl.useProgram(shaderProgram);
 
