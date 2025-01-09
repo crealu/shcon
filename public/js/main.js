@@ -8,6 +8,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let gl = canvas.getContext('webgl');
+let theSetup = new ShaderSetup(gl, canvas);
+
 let time = 0.0;
 const timeLimit = 12;
 let uniformTime, shaderTime;
@@ -19,7 +21,7 @@ let programs = [];
 function parseBoth(text) {
   let shaders = text.split('//**');
   vs = shaders[0];
-  fs = shaders[1];
+  fs = shaders[1];  
 
   console.log(vs);
   start(shaders[0], shaders[1]);
@@ -112,12 +114,19 @@ function initUniforms() {
   return uTime;
 }
 
-function start(theVS, theFS) {
-  theProgram = initShaderProgram(theVS, theFS);
-  initBuffers();
-  initLocation();
-  uniformTime = initUniforms();
-}
+// function start(theVS, theFS) {
+//   theProgram = initShaderProgram(theVS, theFS);
+//   initBuffers();
+//   initLocation();
+//   uniformTime = initUniforms();
+// }
+
+function start(vs, fs) {
+  theSetup.initProgram(vs, fs);
+  theSetup.initBuffers();
+  theSetup.initLocations();
+  theSetup.render();
+} 
 
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 gl.clearDepth(1.0);
