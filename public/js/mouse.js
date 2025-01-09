@@ -8,12 +8,14 @@ let gl = canvas.getContext('webgl');
 let termination = 12;
 let mouse = { x: 0, y: 0 }
 let time = 0.0;
+let scheme = 0.0;
 // let uniformTime;
 // let uniforomMouse;
 
 let uniforms = {
   time: null,
-  mouse: null
+  mouse: null,
+  scheme: 0.0
 };
 
 let theProgram;
@@ -76,12 +78,16 @@ function initUniforms() {
   const uMouse = gl.getUniformLocation(theProgram, 'u_mouse');
   gl.uniform2f(uMouse, mouse.x, mouse.y);
 
+  const uScheme = gl.getUniformLocation(theProgram, 'u_scheme');
+  gl.uniform1f(uScheme, scheme);
+
   // const uCameraZ = gl.getUniformLocation(theProgram, 'u_camera_z');
   // gl.uniform1f(uCameraZ, cameraZ);
 
   return {
     time: uTime,
-    mouse: uMouse
+    mouse: uMouse,
+    scheme: uScheme
   }
 } 
 
@@ -127,9 +133,10 @@ function render() {
   // uniforms.cameraZ = lerp(uniforms.cameraZ, cameraZChange, 0.01);
 
   gl.uniform1f(uniforms.time, time);
+  gl.uniform1f(uniforms.scheme, scheme);
   gl.uniform2f(uniforms.mouse, mouse.x, mouse.y);
-  // gl.uniform1f(uniforms.cameraZ, cameraZ);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
+  // gl.uniform1f(uniforms.cameraZ, cameraZ);
 
   if (time >= timeLimit) {
     window.cancelAnimationFrame(render);
@@ -183,6 +190,17 @@ function handleKeyPress(event) {
     render();
   }
 
+  if (event.key == ' ') {
+    if (scheme == 2) {
+      scheme = 0;
+    } else {
+      scheme++;
+    }
+
+    console.log(scheme);
+    console.log('space');
+  }
+
   if (event.key == 'w') {
     // cameraZ += 0.05;
     cameraZChange += 0.05;
@@ -190,7 +208,7 @@ function handleKeyPress(event) {
     // cameraZ -= 0.05;
     cameraZChange -= 0.05;
   }
-  console.log(cameraZ);
+  // console.log(cameraZ);
 }
 
 function handleLoad() {

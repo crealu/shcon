@@ -13,6 +13,7 @@ precision mediump float;
 uniform vec3 u_resolution;
 uniform float u_time;
 uniform vec2 u_mouse;
+uniform float u_scheme;
 
 float sdSphere(vec3 p, float s) {
   return length(p) - s;
@@ -58,13 +59,19 @@ vec3 palette1(float t) {
   return a1 + b * cos(3.14 * (c1 * t + d1));
 }
 
+// 141 0 255
+
 vec3 palette2(float t) {
-  return .5+.5*cos(6.28318*(t+vec3(.3,.416,.557)));
+  return 0.5 + 0.5 * cos(6.28318 * (t + vec3(0.3, 0.416, 0.557)));
 }
 
 vec3 palette3(float t) {
-  return .5+.5*cos(6.28318*(t+vec3(.5,.716,.557)));
+  return 0.5 + 0.5 * cos(6.28318 * (t + vec3(0.5, 0.716, 0.557)));
 }
+
+// vec3 palette4(float t) {
+//   return 0.5 + 0.5 * cos(6.28318 * (t + vec3(0.55, 0.0, 1.0)));
+// }
 
 // distance to scene
 float map(vec3 p, float ti) {
@@ -80,23 +87,28 @@ float map(vec3 p, float ti) {
 }
 
 void main() {
-  vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / u_resolution.y;
+  vec2 view = 2.0 * gl_FragCoord.xy - u_resolution.xy;
+  float axis = u_resolution.y;
+  vec2 field = view / axis;
+  vec2 field0 = field;
+
+  // vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / u_resolution.y;
   vec2 m = (u_mouse.xy * 2.0 - u_resolution.xy) / u_resolution.y;
 
   // initialization
   vec3 ro = vec3(0.0, 0.0, -3.0);       // origin
-  vec3 rd = normalize(vec3(uv, 1.0));   // direction
+  vec3 rd = normalize(vec3(field, 1.0));   // direction
   vec3 col = vec3(0);                   // color
   float t = 0.0;                        // total distance traveled
 
 
   // vertical rotation camera
-  ro.yz *= rot2D(-m.y);
-  rd.yz *= rot2D(-m.y);  
+  // ro.yz *= rot2D(-m.y);
+  // rd.yz *= rot2D(-m.y);  
 
   // horizontal rotation camera
-  ro.xz *= rot2D(-m.x + u_time/10.0);
-  rd.xz *= rot2D(-m.x + u_time/10.0);  
+  ro.xz *= rot2D(-m.x + u_time / 10.0);
+  rd.xz *= rot2D(-m.x + u_time / 10.0);  
 
   // ro.xz *= rot2D(-m.x);
   // rd.xz *= rot2D(-m.x);
@@ -111,7 +123,7 @@ void main() {
     vec3 p = ro + rd * t;       // position along the ray
 
     p.xy *= rot2D(t * 0.2 + m.x);
-    p.y += sin(t*(m.y + 1.0) * 0.5) * 0.35;
+    p.y += sin(t * (m.y + 1.0) * 0.5) * 0.35;
 
     float d = map(p, u_time);   // current distnace to scene
     t += d;                     // march the ray      
@@ -121,7 +133,14 @@ void main() {
     if (d < 0.001 || t > 100.0) break;
   }
 
-  col = palette3(t * 0.04 + float(x) * 0.005);
+  // if (u_scheme == 0.0) {
+  //   col = palette2(t * 0.04 + float(x) * 0.005);
+  // } else if (u_scheme = 1.0) {
+  //   col = palette3(t * 0.04 + float(x) * 0.005);
+  // } else {
+  //   col = palette4(t * 0.04 + float(x) * 0.005);
+  // }
+    col = palette4(t * 0.04 + float(x) * 0.005);
 
   gl_FragColor = vec4(col, 1.0);
 }

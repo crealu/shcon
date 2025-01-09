@@ -53,7 +53,7 @@ vec3 palette2(float t) {
 }
 
 vec3 palette3(float t) {
-  return .5+.5*cos(6.28318*(t+vec3(.5,.716,.557)));
+  return .5 + .5 * cos(6.28318 * (t + vec3(.5,.716,.557)));
 }
 
 // distance to scene
@@ -70,23 +70,27 @@ float map(vec3 p, float ti) {
 }
 
 void main() {
-  vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / u_resolution.y;
+  vec2 view = 2.0 * gl_FragCoord.xy - u_resolution.xy;
+  float axis = u_resolution.y;
+  vec2 field = view / axis;
+  fec2 field0 = field;
+
+  // vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / u_resolution.y;
   vec2 m = (u_mouse.xy * 2.0 - u_resolution.xy) / u_resolution.y;
 
   // initialization
-  vec3 ro = vec3(0.0, 0.0, -3.0);       // origin
-  vec3 rd = normalize(vec3(uv, 1.0));   // direction
-  vec3 col = vec3(0);                   // color
-  float t = 0.0;                        // total distance traveled
-
+  vec3 ro = vec3(0.0, 0.0, -3.0);         // origin
+  vec3 rd = normalize(vec3(field, 1.0));  // direction
+  vec3 col = vec3(0);                     // color
+  float t = 0.0;                          // total distance traveled
 
   // vertical rotation camera
   ro.yz *= rot2D(-m.y);
   rd.yz *= rot2D(-m.y);  
 
   // horizontal rotation camera
-  ro.xz *= rot2D(-m.x + u_time/10.0);
-  rd.xz *= rot2D(-m.x + u_time/10.0);  
+  ro.xz *= rot2D(-m.x + u_time / 10.0);
+  rd.xz *= rot2D(-m.x + u_time / 10.0);  
 
   // ro.xz *= rot2D(-m.x);
   // rd.xz *= rot2D(-m.x);
