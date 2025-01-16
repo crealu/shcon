@@ -33,7 +33,9 @@ app.post('/one-shader', (req, res) => {
 });
 
 app.post('/shaders', (req, res) => {
-	res.sendFile('shaders/0' + req.body.n + '/both.glsl', root);
+	let sn = req.body.n.toString();
+	console.log(sn);
+	res.sendFile('shaders/0' + sn + '/both.glsl', root);
 });
 
 app.listen(port, () => { console.log(`listening on ${port}`) });

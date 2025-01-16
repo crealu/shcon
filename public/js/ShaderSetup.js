@@ -40,12 +40,10 @@ class ShaderSetup {
 		this.program = shaderProgram;
 	}
 
-
-
 	initBuffers() {
 		this.positions = [-1, -1, -1, 3, 3, -1];
 
-		const positionBuffer = gl.createBuffer();
+		const positionBuffer = this.gl.createBuffer();
 		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
 		this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.positions), this.gl.STATIC_DRAW);
 	
@@ -70,10 +68,11 @@ class ShaderSetup {
 		this.uTime = uniformTime;	
 	}
 
-	setup() {
-		this.initProgram(this.vs, this.fs);
+	setup(vs, fs) {
+		this.initProgram(vs, fs);
 		this.initBuffers();
 		this.initLocations();
+		this.clear();
 		this.render();
 	}
 
@@ -96,7 +95,6 @@ class ShaderSetup {
 	}
 
 	render() {
-		this.clear();
 
 		this.time += 0.01;
 

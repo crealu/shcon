@@ -21,7 +21,6 @@ body {
   overflow: hidden;
 }
 
-
 .foreground {
   position: absolute;
   display: block;
@@ -59,10 +58,6 @@ body {
   opacity: 0;
 }
 
-.reveal {
-  opacity: 1;
-}
-
 #iku {
   position: absolute;
   left: 0px;
@@ -79,23 +74,6 @@ body {
   transition: 0.3s ease;
   z-index: 10;
   cursor: pointer;
-}
-
-.ikur {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: calc(50% - 30px);
-  margin: 0 auto;
-  border: none;
-  background: none;
-  color: white;
-  font-size: 32px;
-  text-align: center;
-  display: none;
-  opacity: 0;
-  transition: top 0.3s ease, opacity 0.3s ease;
-  z-index: 10;
 }
 
 .active-reading {
@@ -174,9 +152,20 @@ body {
   clip-path: circle(100%);
 }
 
+.a-canvas {
+  width: 100px;
+  height: 100px;
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 0px 0px rgb(255 243 243);
+  animation: 4s ease 0s levitate 3;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
 .reveal {
-/*  clip-path: circle(0%);*/
-/*  animation: 2s var(--cb-4) 0s toggle-clip 1 forwards;*/
   opacity: 1;
 }
 
@@ -209,18 +198,6 @@ body {
   top: calc(50vh - 200px);
 }
 
-.a-canvas {
-  width: 100px;
-  height: 100px;
-  width: 100px;
-  height: 100px;
-  margin: 20px;
-  border-radius: 50%;
-  box-shadow: 0 0 0px 0px rgb(255 243 243);
-  animation: 4s ease 0s levitate 3;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
-}
 
 @keyframes levitate {
   0% {
@@ -236,19 +213,6 @@ body {
     transform: translate(0px, 0px);
   }
 }
-
-/*p {
-  position: absolute;
-  color: red;
-  font-size: 28px;
-  text-align: center;
-  left: 0px;
-  right: 0px;
-  margin: 0px;
-  padding: 20px;
-  letter-spacing: 2px;
-  z-index: 10;
-}*/
 
 input {
   position: relative;
