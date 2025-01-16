@@ -78,16 +78,16 @@ function initUniforms() {
   const uMouse = gl.getUniformLocation(theProgram, 'u_mouse');
   gl.uniform2f(uMouse, mouse.x, mouse.y);
 
-  const uScheme = gl.getUniformLocation(theProgram, 'u_scheme');
-  gl.uniform1f(uScheme, scheme);
+  // const uScheme = gl.getUniformLocation(theProgram, 'u_scheme');
+  // gl.uniform1f(uScheme, scheme);
 
   // const uCameraZ = gl.getUniformLocation(theProgram, 'u_camera_z');
   // gl.uniform1f(uCameraZ, cameraZ);
 
   return {
     time: uTime,
-    mouse: uMouse,
-    scheme: uScheme
+    mouse: uMouse
+    // scheme: uScheme
   }
 } 
 
@@ -133,7 +133,7 @@ function render() {
   // uniforms.cameraZ = lerp(uniforms.cameraZ, cameraZChange, 0.01);
 
   gl.uniform1f(uniforms.time, time);
-  gl.uniform1f(uniforms.scheme, scheme);
+  // gl.uniform1f(uniforms.scheme, scheme);
   gl.uniform2f(uniforms.mouse, mouse.x, mouse.y);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   // gl.uniform1f(uniforms.cameraZ, cameraZ);
@@ -191,10 +191,10 @@ function handleKeyPress(event) {
   }
 
   if (event.key == ' ') {
-    if (scheme == 2) {
-      scheme = 0;
+    if (uniforms.scheme == 2) {
+      uniforms.scheme = 0;
     } else {
-      scheme++;
+      uniforms.scheme++;
     }
 
     console.log(scheme);
