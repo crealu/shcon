@@ -14,9 +14,22 @@ class ShaderSetup {
 		this.id = '';
 	}
 
+	loadShader(type, source) {
+		const shader = this.gl.createShader(type);
+		this.gl.shaderSource(shader, source);
+		this.gl.compileShader(shader);
+
+		if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+			this.gl.deleteShader(shader);
+			return null;
+		}
+
+		return shader;
+	}
+
 	initProgram(vsSource, fsSource) {
-		this.vs = loadShader(this.gl, this.gl.VERTEX_SHADER, vsSource);
-		this.fs = loadShader(this.gl, this.gl.FRAGMENT_SHADER, fsSource);
+		this.vs = this.loadShader(this.gl.VERTEX_SHADER, vsSource);
+		this.fs = this.loadShader(this.gl.FRAGMENT_SHADER, fsSource);
 
 		const shaderProgram = this.gl.createProgram();
 		this.gl.attachShader(shaderProgram, this.vs);
@@ -27,18 +40,7 @@ class ShaderSetup {
 		this.program = shaderProgram;
 	}
 
-	loadShader(gl, type, source) {
-		const shader = gl.createShader(type);
-		gl.shaderSource(shader, source);
-		gl.compileShader(shader);
 
-		if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-			gl.deleteShader(shader);
-			return null;
-		}
-
-		return shader;
-	}
 
 	initBuffers() {
 		this.positions = [-1, -1, -1, 3, 3, -1];
@@ -55,15 +57,15 @@ class ShaderSetup {
 	initLocations() {
 		this.gl.useProgram(this.program);
 
-		const positionLocation = gl.getAttribLocation(this.program, "a_position");
+		const positionLocation = this.gl.getAttribLocation(this.program, "a_position");
 		this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);  
 		this.gl.enableVertexAttribArray(positionLocation);
 
 		const uResolution = this.gl.getUniformLocation(this.program, 'u_resolution');
 		this.gl.uniform3f(uResolution, this.canvas.width, this.canvas.height, 1.0);
 
-		const uniformTime =this. gl.getUniformLocation(this.program, 'u_time');
-		this.gl.uniform1f(uniformTime, time);
+		const uniformTime = this.gl.getUniformLocation(this.program, 'u_time');
+		this.gl.uniform1f(uniformTime, this.time);
 
 		this.uTime = uniformTime;	
 	}

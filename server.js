@@ -29,7 +29,7 @@ app.post('/mouse-shaders', (req, res) => {
 });
 
 app.post('/one-shader', (req, res) => {
-	res.sendFile('shaders/04/both.glsl', root);
+	res.sendFile('shaders/01/both.glsl', root);
 });
 
 app.post('/shaders', (req, res) => {
