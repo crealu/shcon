@@ -25,7 +25,8 @@ body {
   position: absolute;
   display: block;
   margin: 0 auto;
-  width: 200px;
+  width: 100%;
+/*  width: 200px;*/
   height: 200px;
   left: 0px;
   right: 0px;
@@ -160,7 +161,7 @@ body {
   margin: 20px;
   border-radius: 50%;
   box-shadow: 0 0 0px 0px rgb(255 243 243);
-  animation: 4s ease 0s levitate 3;
+/*  animation: 4s ease 0s levitate 3;*/
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
 }
@@ -196,6 +197,7 @@ body {
   width: 400px;
   height: 400px;
   top: calc(50vh - 200px);
+  z-index: 10;
 }
 
 

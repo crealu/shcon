@@ -84,9 +84,15 @@ class ShaderSetup {
 	}
 
 	clear() {
-		this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-		this.gl.clearDepth(1.0);
-		this.gl.enable(this.gl.DEPTH_TEST);
+		// this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		// this.gl.clearDepth(1.0);
+		// this.gl.enable(this.gl.DEPTH_TEST);
+		// this.gl.depthFunc(this.gl.LEQUAL);
+
+		this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
+		this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+		// gl.clearDepth(1.0);
+		this.gl.enable(gthis.l.DEPTH_TEST);
 		this.gl.depthFunc(this.gl.LEQUAL);
 	}
 
@@ -95,7 +101,6 @@ class ShaderSetup {
 	}
 
 	render() {
-
 		this.time += 0.01;
 
 		this.gl.uniform1f(this.uTime, this.time);
@@ -109,3 +114,25 @@ class ShaderSetup {
 		this.id = window.requestAnimationFrame(() => this.render());
 	}
 }
+
+class AlphaShader extends ShaderSetup {
+	constructor(gl, canvas) {
+		super(gl, canvas);
+	}
+
+	clear() {		
+		// this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
+		// // this.gl.clearDepth(1.0);
+		// this.gl.enable(this.gl.DEPTH_TEST);
+		// this.gl.depthFunc(this.gl.LEQUAL);
+
+
+		gl.clearColor(0.0, 0.0, 0.0, 0.0);
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		// gl.clearDepth(1.0);
+		gl.enable(gl.DEPTH_TEST);
+		gl.depthFunc(gl.LEQUAL);
+
+	}
+}
+
