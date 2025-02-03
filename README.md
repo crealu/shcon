@@ -1,6 +1,10 @@
 # Shcon
 A project exploring GLSL shader programming and a consideration on its implementation in user intefaces and experiences.
 
+<a href="https://shcon-902b612ebe5d.herokuapp.com/random">Live</a>
+![alt text](./public/img/capture1.png)
+
+
 &nbsp;
 ## Prerequisites
 Node.js (v18.16.0 >=) installed on local machine.
@@ -18,10 +22,20 @@ Animation start and stop controlled by user input.
 - 'J' to start (and speed up)
 - 'P' to stop (and slow down)
 
-Application endpoints for various pages
+Application endpoints that serve pages with various functionality
 - `/random` displays a randomly chosen shader animation from the shaders folder
+<a href="https://shcon-902b612ebe5d.herokuapp.com/random">Random</a>
+![alt text](./public/img/capture2.png)
+
+&nbsp;
 - `/mouse` for mouse click interactivity
+<a href="https://shcon-902b612ebe5d.herokuapp.com/mouse">Mouse</a>
+![alt text](./public/img/capture3.png)
+
+&nbsp;
 - `/dos` renders animations in two separate canvases
+<a href="https://shcon-902b612ebe5d.herokuapp.com/Dos">Dos</a>
+![alt text](./public/img/capture4.png)
 
 &nbsp;
 ## ShaderSetup Documentation
@@ -123,6 +137,9 @@ Handles rendering and recursivley updates the shader's time uniform on each fram
 
 Returns:
 * void
+
+![alt text](./public/img/logo-drawing-1.png)
+
 
 &nbsp;&nbsp;
 ### Contributing
