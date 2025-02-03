@@ -2,18 +2,18 @@
 A project exploring GLSL shader programming and a consideration on its implementation in user intefaces and experiences.
 
 &nbsp;
-### Prerequisites
+## Prerequisites
 Node.js (v18.16.0 >=) installed on local machine.
 
 &nbsp;
-### Installation & Setup
+## Installation & Setup
 1. Clone the repository.
 2. Navigate to cloned directory and run `npm i`
 3. In a terminal window, run `npm run dev`
 4. Open browser window to localhost:9800
 
 &nbsp;
-### Featues
+## Featues
 Animation start and stop controlled by user input.
 	- 'J' to start (and speed up) animation
 	- 'P' to stop (and slow down) animation
@@ -22,14 +22,11 @@ Endpoints for various animations
 - /random for random
 
 &nbsp;
-### Documentation
+## ShaderSetup Documentation
 This project includes a custom class, ShaderSetup, designed to simplify the setup, creation, and management of WebGL shader programs renderd on an HTML canvas.
 It handles shader compilation, buffer initialization, and rendering on an HTML canvas.
 
-## ShaderSetup class
-
-&nbsp;
-## Constructor
+### Constructor
 Creates an instance of the ShaderSetup class.
 
 Parameters:
@@ -40,7 +37,7 @@ Returns:
 * A new ShaderSetup instance.
 
 &nbsp;
-Methods
+### Methods
 
 ## loadShader(type, source)
 Compiles a WebGL shader of the specified type.
@@ -56,7 +53,7 @@ Throws:
 * Error – If the shader fails to compile
 
 
-## initProgram(vsSource, fsSource)
+### initProgram(vsSource, fsSource)
 Initializes and links a shader program using the provided vertex and fragment shader sources.
 
 Parameters:
@@ -70,20 +67,20 @@ Throws:
 * Error – If linking fails.
 
 
-## initBuffers()
+### initBuffers()
 Creates and initializes WebGL buffers for rendering.
 
 Returns:
 * void
 
-## initLocations()
+### initLocations()
 Configures shader attribute and uniform locations.
 
 Returns:
 * void
 
 
-## setup(vs, fs)
+### setup(vs, fs)
 Sets up the shader program, initializes buffers and locations, clears the canvas, and starts rendering.
 
 Parameters:
@@ -92,7 +89,9 @@ Parameters:
 
 Returns:
 * void
-reset(vs, fs)
+
+
+### reset(vs, fs)
 Resets the shader program and reinitializes buffers and locations before rendering.
 
 Parameters:
@@ -103,21 +102,21 @@ Returns:
 * void
 
 
-## clear()
+### clear()
 Clears the WebGL canvas.
 
 Returns:
 * void
 
 
-## pause()
+### pause()
 Pauses rendering by canceling the animation frame request.
 
 Returns:
 * void
 
 
-## render()
+### render()
 Handles rendering and recursivley updates the shader's time uniform on each frame.
 
 Returns:
