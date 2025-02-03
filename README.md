@@ -24,7 +24,7 @@ Animation start and stop controlled by user input.
 - 'P' to stop (and slow down)
 
 Application endpoints that serve pages with various functionality
-&nbsp;
+<br>
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Random</a>
 - `/random` displays a randomly chosen shader animation from the shaders folder 
 <img src="./public/img/capture2.png" width="300">
