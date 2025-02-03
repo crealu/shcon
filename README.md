@@ -2,7 +2,7 @@
 A project exploring GLSL shader programming and a consideration on its implementation in user intefaces and experiences.
 
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Live</a>
-![alt text](./public/img/capture1.png)
+<img src="./public/img/capture1.png" width="300">
 
 
 &nbsp;
@@ -23,20 +23,19 @@ Animation start and stop controlled by user input.
 - 'P' to stop (and slow down)
 
 Application endpoints that serve pages with various functionality
-- `/random` displays a randomly chosen shader animation from the shaders folder
-<br>
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Random</a>
+- `/random` displays a randomly chosen shader animation from the shaders folder 
 <img src="./public/img/capture2.png" width="300">
 
 &nbsp;
-- `/mouse` for mouse click interactivity
 <a href="https://shcon-902b612ebe5d.herokuapp.com/mouse">Mouse</a>
-![alt text](./public/img/capture3.png)
+- `/mouse` for mouse click interactivity
+<img src="./public/img/capture3.png" width="300">
 
 &nbsp;
-- `/dos` renders animations in two separate canvases
 <a href="https://shcon-902b612ebe5d.herokuapp.com/Dos">Dos</a>
-![alt text](./public/img/capture4.png)
+- `/dos` renders animations in two separate canvases
+<img src="./public/img/capture4.png" width="300">
 
 &nbsp;
 ## ShaderSetup Documentation
