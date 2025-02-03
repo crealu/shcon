@@ -24,8 +24,9 @@ Animation start and stop controlled by user input.
 
 Application endpoints that serve pages with various functionality
 - `/random` displays a randomly chosen shader animation from the shaders folder
+<br>
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Random</a>
-![alt text](./public/img/capture2.png)
+<img src="./public/img/capture2.png" width="300">
 
 &nbsp;
 - `/mouse` for mouse click interactivity
