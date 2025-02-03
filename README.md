@@ -2,6 +2,7 @@
 A project exploring GLSL shader programming and a consideration on its implementation in user intefaces and experiences.
 
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Live</a>
+&nbsp;
 <img src="./public/img/capture1.png" width="300">
 
 
