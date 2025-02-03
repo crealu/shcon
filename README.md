@@ -15,11 +15,13 @@ Node.js (v18.16.0 >=) installed on local machine.
 &nbsp;
 ## Featues
 Animation start and stop controlled by user input.
-	- 'J' to start (and speed up) animation
-	- 'P' to stop (and slow down) animation
+- 'J' to start (and speed up)
+- 'P' to stop (and slow down)
 
-Endpoints for various animations
-- /random for random
+Application endpoints for various pages
+- `/random` displays a randomly chosen shader animation from the shaders folder
+- `/mouse` for mouse click interactivity
+- `/dos` renders animations in two separate canvases
 
 &nbsp;
 ## ShaderSetup Documentation
