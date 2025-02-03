@@ -39,7 +39,7 @@ Returns:
 &nbsp;
 ### Methods
 
-## loadShader(type, source)
+### loadShader(type, source)
 Compiles a WebGL shader of the specified type.
 
 Parameters:
@@ -52,7 +52,7 @@ Returns:
 Throws:
 * Error – If the shader fails to compile
 
-
+&nbsp;
 ### initProgram(vsSource, fsSource)
 Initializes and links a shader program using the provided vertex and fragment shader sources.
 
@@ -66,7 +66,7 @@ Returns:
 Throws:
 * Error – If linking fails.
 
-
+&nbsp;
 ### initBuffers()
 Creates and initializes WebGL buffers for rendering.
 
@@ -79,7 +79,7 @@ Configures shader attribute and uniform locations.
 Returns:
 * void
 
-
+&nbsp;
 ### setup(vs, fs)
 Sets up the shader program, initializes buffers and locations, clears the canvas, and starts rendering.
 
@@ -90,7 +90,7 @@ Parameters:
 Returns:
 * void
 
-
+&nbsp;
 ### reset(vs, fs)
 Resets the shader program and reinitializes buffers and locations before rendering.
 
@@ -101,28 +101,28 @@ Parameters:
 Returns:
 * void
 
-
+&nbsp;
 ### clear()
 Clears the WebGL canvas.
 
 Returns:
 * void
 
-
+&nbsp;
 ### pause()
 Pauses rendering by canceling the animation frame request.
 
 Returns:
 * void
 
-
+&nbsp;
 ### render()
 Handles rendering and recursivley updates the shader's time uniform on each frame.
 
 Returns:
 * void
 
-&nbsp;
+&nbsp;&nbsp;
 ### Contributing
 Want to contribute? Please fork the repo and submit a pull request!
 
