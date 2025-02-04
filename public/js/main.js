@@ -1,10 +1,12 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
 const gl = canvas.getContext('webgl');
-const theSetup = new ShaderSetup(gl, canvas);
 
+// this isn't working now?
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
+let theSetup = new ShaderSetup(gl, canvas);
 
 function parseBoth(text) {
   let shaders = text.split('//**');
@@ -29,7 +31,8 @@ function randomIntFromRange(min, max) {
 }
 
 async function fetchShaders() {
-  let number = randomIntFromRange(1, 8);
+  // let number = randomIntFromRange(1, 8);
+  let number = 1
 
   let data = {n: number}
 
@@ -53,15 +56,12 @@ function start(vs, fs) {
 
 function handleClick() {
   iku.style.opacity = '0';
-  canvas.style.display = 'block';
   canvas.classList.add('reveal');
   theSetup.render();
 }
 
 function displayCanvas() {    
-  canvas.style.display = 'block';
   canvas.classList.add('reveal');
-  // theSetup.render();
 }
 
 function handleLoad() {
@@ -72,7 +72,7 @@ function handleKeyPress(event) {
   if (event.key == 'j') {
     displayCanvas();
   } else if (event.key == 'p') {
-    pause();
+    theSetup.pause();
   }
 }
 

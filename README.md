@@ -8,7 +8,7 @@ A project exploring GLSL shader programming and a consideration on its implement
 
 &nbsp;
 ## Prerequisites
-Node.js (v18.16.0 >=) installed on local machine.
+Node.js (v18.16.0 or greater) installed on local machine.
 
 &nbsp;
 ## Installation & Setup
@@ -142,12 +142,6 @@ Returns:
 
 ![alt text](./public/img/logo-drawing-1.png)
 
-
-&nbsp;&nbsp;
-### Contributing
+&nbsp;
+## Contributing
 Want to contribute? Please fork the repo and submit a pull request!
-
-
-
-
-
