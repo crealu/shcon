@@ -33,6 +33,8 @@ async function fetchShaders() {
   let number = randomIntFromRange(1, 8);
   console.log(number)
 
+  number = number == 3 ? number + 1: number;
+
   let data = {n: number}
 
   const options = {
