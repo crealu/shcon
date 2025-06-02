@@ -13,6 +13,14 @@ class ShaderSetup {
 		this.id = '';
 	}
 
+	setup(vs, fs) {
+		this.initProgram(vs, fs);
+		this.initBuffers();
+		this.initLocations();
+		this.clear();
+		this.render();
+	}
+
 	loadShader(type, source) {
 		const shader = this.gl.createShader(type);
 		this.gl.shaderSource(shader, source);
@@ -29,6 +37,9 @@ class ShaderSetup {
 	initProgram(vsSource, fsSource) {
 		this.vs = this.loadShader(this.gl.VERTEX_SHADER, vsSource);
 		this.fs = this.loadShader(this.gl.FRAGMENT_SHADER, fsSource);
+
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
 
 		const shaderProgram = this.gl.createProgram();
 		this.gl.attachShader(shaderProgram, this.vs);
@@ -67,13 +78,7 @@ class ShaderSetup {
 		this.uTime = uniformTime;	
 	}
 
-	setup(vs, fs) {
-		this.initProgram(vs, fs);
-		this.initBuffers();
-		this.initLocations();
-		this.clear();
-		this.render();
-	}
+
 
 	reset(vs, fs) {
 		this.initProgram(vs, fs);

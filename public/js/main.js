@@ -3,8 +3,8 @@ const iku = document.getElementById('iku');
 const gl = canvas.getContext('webgl');
 
 // this isn't working now?
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 
 let theSetup = new ShaderSetup(gl, canvas);
 

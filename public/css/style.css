@@ -19,6 +19,7 @@ body {
   font-family: 'Prompt';
   font-weight: 100;
   overflow: hidden;
+  flex-direction: column;
 }
 
 .the-canvas {
@@ -31,15 +32,42 @@ body {
 
 .foreground {
   position: absolute;
-  display: block;
+  display: flex;
   margin: 0 auto;
   width: 100%;
   height: 200px;
   left: 0px;
   right: 0px;
-  top: calc(50vh - 100px);
-  border-radius: 50%;
   z-index: 10;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#iku {
+  position: relative;
+  margin: 0 auto;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  display: block;
+  opacity: 1;
+  transition: 0.3s ease;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#iku:hover {
+  text-decoration: underline;
+}
+
+.selection {
+  position: relative;
+  display: block;
+  margin: 0 auto;
 }
 
 .start-btn {
@@ -62,24 +90,6 @@ body {
 
 .hide {
   opacity: 0;
-}
-
-#iku {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: calc(50% - 10px);
-  margin: 0 auto;
-  border: none;
-  background: none;
-  color: white;
-  font-size: 40px;
-  text-align: center;
-  display: block;
-  opacity: 1;
-  transition: 0.3s ease;
-  z-index: 10;
-  cursor: pointer;
 }
 
 .active-reading {
