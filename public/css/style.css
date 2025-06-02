@@ -43,6 +43,7 @@ body {
   align-items: center;
   align-content: center;
   flex-direction: column;
+  transition: 0.25s ease;
 }
 
 #iku {

@@ -1,5 +1,7 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
+const selection = document.getElementsByClassName('selection')[0];
+const foreground = document.getElementsByClassName('foreground')[0];
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -9,6 +11,7 @@ canvas.height = window.innerHeight;
 
 const gl = canvas.getContext('webgl');
 let theSetup = new ShaderSetup(gl, canvas);
+// let shaderNumber = 1;
 
 function parseBoth(text) {
   let shaders = text.split('//**');
@@ -32,11 +35,8 @@ function randomIntFromRange(min, max) {
   return Math.floor(Math.random() * (max - min * 1) + min);
 }
 
-async function fetchShaders() {
-  // let number = randomIntFromRange(1, 8);
-  let number = 3
-
-  let data = {n: number}
+async function fetchShader(shaderNumber) {
+  let data = { n: shaderNumber }
 
   const options = {
     method: 'post',
@@ -57,7 +57,8 @@ function start(vs, fs) {
 } 
 
 function handleClick() {
-  iku.style.opacity = '0';
+  // iku.style.opacity = '0';
+  foreground.classList.add('vanish');
   canvas.classList.add('reveal');
   theSetup.render();
 }
@@ -67,7 +68,7 @@ function displayCanvas() {
 }
 
 function handleLoad() {
-  fetchShaders();
+  fetchShader(1);
 }
 
 function handleKeyPress(event) {
@@ -78,6 +79,12 @@ function handleKeyPress(event) {
   }
 }
 
+function changeOption(event) {
+  let number = parseInt(event.target.value);
+  fetchShader(number);
+}
+
+selection.addEventListener('change', changeOption)
 iku.addEventListener('click', handleClick);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);
