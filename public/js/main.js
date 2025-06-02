@@ -1,11 +1,13 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
+
+// if gl is initialized before setting canvas width and height, 
+// the canvas will visually be cut off at the screens halfway point
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 const gl = canvas.getContext('webgl');
-
-// this isn't working now?
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
-
 let theSetup = new ShaderSetup(gl, canvas);
 
 function parseBoth(text) {
