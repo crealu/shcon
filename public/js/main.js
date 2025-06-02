@@ -32,7 +32,7 @@ function randomIntFromRange(min, max) {
 
 async function fetchShaders() {
   // let number = randomIntFromRange(1, 8);
-  let number = 2
+  let number = 3
 
   let data = {n: number}
 
