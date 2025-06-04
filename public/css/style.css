@@ -69,6 +69,13 @@ body {
   position: relative;
   display: block;
   margin: 0 auto;
+  background: none;
+  border: 1px solid white;
+  border-radius: 8px;
+  color: white;
+  margin-top: 20px;
+  padding: 6px 10px;
+  cursor: pointer;
 }
 
 .start-btn {
