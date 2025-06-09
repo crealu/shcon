@@ -75,15 +75,14 @@ class ShaderSetup {
 		const uniformTime = this.gl.getUniformLocation(this.program, 'u_time');
 		this.gl.uniform1f(uniformTime, this.time);
 
+		// this.gl.enable(gl.BLEND);
+		// this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
 		this.uTime = uniformTime;	
 	}
 
-
-
-	reset(vs, fs) {
-		this.initProgram(vs, fs);
-		this.initBuffers();
-		this.initLocations();
+	reset() {
+		this.time = 0;
 		this.render();
 	}
 

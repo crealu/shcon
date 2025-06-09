@@ -2,6 +2,9 @@ const canvas = document.getElementsByClassName('the-canvas')[0];
 const iku = document.getElementById('iku');
 const selection = document.getElementsByClassName('selection')[0];
 const foreground = document.getElementsByClassName('foreground')[0];
+const controls = document.getElementsByClassName('controls')[0];
+const pauseButton = controls.children[0];
+const resetButton = controls.children[1];
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -11,7 +14,6 @@ canvas.height = window.innerHeight;
 
 const gl = canvas.getContext('webgl');
 let theSetup = new ShaderSetup(gl, canvas);
-// let shaderNumber = 1;
 
 function parseBoth(text) {
   let shaders = text.split('//**');
@@ -60,6 +62,7 @@ function handleClick() {
   // iku.style.opacity = '0';
   foreground.classList.add('vanish');
   canvas.classList.add('reveal');
+  controls.classList.add('reveal');
   theSetup.render();
 }
 
@@ -84,7 +87,17 @@ function changeOption(event) {
   fetchShader(number);
 }
 
+function handlePause(event) {
+  theSetup.pause();
+}
+
+function handleReset(event) {
+  theSetup.reset();
+}
+
 selection.addEventListener('change', changeOption)
 iku.addEventListener('click', handleClick);
+pauseButton.addEventListener('click', handlePause);
+resetButton.addEventListener('click', handleReset);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);

@@ -31,7 +31,15 @@ void main() {
   float axis = u_resolution.y;
   vec2 field = view / axis;
   vec2 field0 = field;
-  
+
+  // float dist = distance(field, vec2(0.5));
+
+  // if (dist > 0.4) {
+  //   // Make everything outside the circle fully transparent
+  //   discard; // OR use: gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+  // } else {
+    // vec3 color = vec3(1.0, 0.2, 0.3); // Example color
+    // gl_FragColor = vec4(color, 1.0);  // Fully opaque in circle
   vec3 finalColor = vec3(0.0);
 
   for (float i = 0.0; i < 4.0; i++) {
@@ -44,7 +52,11 @@ void main() {
     d = abs(d);
     d = pow(0.01 / d, 1.2);
 
-    finalColor += col * d;
+    if (d > 0.4) {
+      discard;
+    } else {
+      finalColor += col * d;
+    }
   }
 
   gl_FragColor = vec4(finalColor, 1.0);
