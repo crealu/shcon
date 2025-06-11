@@ -18,9 +18,12 @@ uniform vec3 u_resolution;
 uniform float u_time;
 
 vec3 palette(float t) {
-  vec3 a = vec3(239.0, 134.0, 52.0) / 255.0;
-  vec3 b = vec3(23.0, 230.0, 135.0) / 255.0;
-  vec3 c = vec3(233.0, 62.0, 220.0) / 255.0;
+  vec3 a = vec3(255.0, 0.0, 0.0) / 255.0;
+  vec3 b = vec3(255.0, 0.0, 0.0) / 255.0;
+  vec3 c = vec3(255.0, 0.0, 0.0) / 255.0;
+  // vec3 a = vec3(239.0, 134.0, 52.0) / 255.0;
+  // vec3 b = vec3(23.0, 230.0, 135.0) / 255.0;
+  // vec3 c = vec3(233.0, 62.0, 220.0) / 255.0;
   vec3 d = vec3(0.0, 0.5, 1.0);
 
   return a + b * cos(3.14 * (c * t + d));
