@@ -9,14 +9,18 @@ let termination = 12;
 let mouse = { x: 0, y: 0 }
 let time = 0.0;
 let scheme = 0.0;
+let color = 0;
 // let uniformTime;
 // let uniforomMouse;
 
 let uniforms = {
   time: null,
   mouse: null,
-  scheme: 0.0
+  scheme: 0.0,
+  color: 0
 };
+
+let col = [255.0, 0.0, 0.0];
 
 let theProgram;
 let id;
@@ -78,6 +82,9 @@ function initUniforms() {
   const uMouse = gl.getUniformLocation(theProgram, 'u_mouse');
   gl.uniform2f(uMouse, mouse.x, mouse.y);
 
+  const uColor = gl.getUniformLocation(theProgram, 'u_color');
+  gl.uniform3f(uColor, col[0], col[1], col[2]);
+
   // const uScheme = gl.getUniformLocation(theProgram, 'u_scheme');
   // gl.uniform1f(uScheme, scheme);
 
@@ -86,7 +93,8 @@ function initUniforms() {
 
   return {
     time: uTime,
-    mouse: uMouse
+    mouse: uMouse,
+    color: uColor,
     // scheme: uScheme
   }
 } 
@@ -135,6 +143,7 @@ function render() {
   gl.uniform1f(uniforms.time, time);
   // gl.uniform1f(uniforms.scheme, scheme);
   gl.uniform2f(uniforms.mouse, mouse.x, mouse.y);
+  gl.uniform3f(uniforms.color, col[0], col[1], col[2]);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   // gl.uniform1f(uniforms.cameraZ, cameraZ);
 
@@ -190,7 +199,7 @@ function handleKeyPress(event) {
     render();
   }
 
-  if (event.key == ' ') {
+  if (event.key == 'j') {
     if (uniforms.scheme == 2) {
       uniforms.scheme = 0;
     } else {
@@ -215,12 +224,17 @@ function handleLoad() {
   fetchShaders();
 }
 
+function handleClick() {
+  uniforms.color = [255.0, 255.0, 0.0];
+}
+
 btn.addEventListener('click', handleButtonClick);
 canvas.addEventListener('mousedown', handleMouseDown);
 canvas.addEventListener('mousemove', handleMouseMove);
 canvas.addEventListener('mouseup', handleMouseUp);
 window.addEventListener('keypress', handleKeyPress);
 window.addEventListener('load', handleLoad);
+window.addEventListener('click', handleClick);
 
 // redInput.addEventListener('input', () => {
 //   console.log(redInput.value);
