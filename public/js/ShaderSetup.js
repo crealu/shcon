@@ -125,6 +125,11 @@ class ShaderInputSetup extends ShaderSetup {
 		this.axis = 1.0;
 		this.size = 0.5;
 		this.color = [0.0, 0.5, 1.0];
+
+		this.uOffset = '';
+		this.uAxis = '';
+		this.uSize = '';
+		this.uColor = '';
 	}
 
 	initLocations() {
@@ -137,24 +142,41 @@ class ShaderInputSetup extends ShaderSetup {
 		const uResolution = this.gl.getUniformLocation(this.program, 'u_resolution');
 		this.gl.uniform3f(uResolution, this.canvas.width, this.canvas.height, 1.0);
 
-		const uniformTime = this.gl.getUniformLocation(this.program, 'u_time');
-		this.gl.uniform1f(uniformTime, this.time);
+		this.uTime = this.gl.getUniformLocation(this.program, 'u_time');
+		this.gl.uniform1f(this.uTime, this.time);
 
-		const uniformOffset = this.gl.getUniformLocation(this.program, 'u_offset');
-		this.gl.uniform1f(uniformOffset, this.offset);
+		this.uOffset = this.gl.getUniformLocation(this.program, 'u_offset');
+		this.gl.uniform1f(this.uOffset, this.offset);
 
-		const uniformAxis = this.gl.getUniformLocation(this.program, 'u_axis');
-		this.gl.uniform1f(uniformAxis, this.axis);
+		this.uAxis = this.gl.getUniformLocation(this.program, 'u_axis');
+		this.gl.uniform1f(this.uAxis, this.axis);
 
-		const uniformSize = this.gl.getUniformLocation(this.program, 'u_size');
-		this.gl.uniform1f(uniformSize, this.size);
+		this.uSize = this.gl.getUniformLocation(this.program, 'u_size');
+		this.gl.uniform1f(this.uSize, this.size);
 
-		const uniformColor = this.gl.getUniformLocation(this.program, 'u_color');
-		this.gl.uniform3f(uniformColor, this.color[0], this.color[1], this.color[2]);
+		this.uColor = this.gl.getUniformLocation(this.program, 'u_color');
+		this.gl.uniform3f(this.uColor, this.color[0], this.color[1], this.color[2]);
 
 		// this.gl.enable(gl.BLEND);
 		// this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+	}
 
-		this.uTime = uniformTime;	
+	render() {
+		this.time += 0.01;
+
+		this.gl.uniform1f(this.uTime, this.time);
+		this.gl.uniform1f(this.uOffset, this.offset);
+		this.gl.uniform1f(this.uAxis, this.axis);
+		this.gl.uniform1f(this.uSize, this.size);
+		this.gl.uniform3f(this.uColor, this.color[0], this.color[1], this.color[2]);
+
+		this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);  
+
+		if (this.time >= this.limit) {
+			this.pause();
+			return;
+		}
+
+		this.id = window.requestAnimationFrame(() => this.render());
 	}
 }
