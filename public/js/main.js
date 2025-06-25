@@ -80,11 +80,25 @@ function handleLoad() {
   fetchShader(1);
 }
 
+function changeUniforms(key) {
+  if (key == 'o') {
+    program.offset = program.offset == 3.0 ? 2.0 : 3.0;
+  } else if (key == 'a') {
+    program.axis = program.axis == 1.0 ? 0.0 : 1.0;
+  } else if (key == 's') {
+    program.size = program.size == 0.5 ? 1.0 : 0.5;
+  } else if (key == 'c') {
+    console.log('change color');
+  }
+}
+
 function handleKeyPress(event) {
   if (event.key == 'j') {
     displayCanvas();
   } else if (event.key == 'p') {
     program.pause();
+  } else {
+    changeUniforms(event.key);
   }
 }
 
