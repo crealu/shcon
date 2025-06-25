@@ -118,4 +118,43 @@ class ShaderSetup {
 	}
 }
 
+class ShaderInputSetup extends ShaderSetup {
+	constructor(gl, canvas) {
+		super(gl, canvas);
+		this.offset = 2.0;
+		this.axis = 1.0;
+		this.size = 0.5;
+		this.color = [0.0, 0.5, 1.0];
+	}
 
+	initLocations() {
+		this.gl.useProgram(this.program);
+
+		const positionLocation = this.gl.getAttribLocation(this.program, "a_position");
+		this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);  
+		this.gl.enableVertexAttribArray(positionLocation);
+
+		const uResolution = this.gl.getUniformLocation(this.program, 'u_resolution');
+		this.gl.uniform3f(uResolution, this.canvas.width, this.canvas.height, 1.0);
+
+		const uniformTime = this.gl.getUniformLocation(this.program, 'u_time');
+		this.gl.uniform1f(uniformTime, this.time);
+
+		const uniformOffset = this.gl.getUniformLocation(this.program, 'u_offset');
+		this.gl.uniform1f(uniformOffset, this.offset);
+
+		const uniformAxis = this.gl.getUniformLocation(this.program, 'u_axis');
+		this.gl.uniform1f(uniformAxis, this.axis);
+
+		const uniformSize = this.gl.getUniformLocation(this.program, 'u_size');
+		this.gl.uniform1f(uniformSize, this.size);
+
+		const uniformColor = this.gl.getUniformLocation(this.program, 'u_color');
+		this.gl.uniform1f(uniformColor, this.color);
+
+		// this.gl.enable(gl.BLEND);
+		// this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+		this.uTime = uniformTime;	
+	}
+}
