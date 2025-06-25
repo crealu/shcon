@@ -150,7 +150,7 @@ class ShaderInputSetup extends ShaderSetup {
 		this.gl.uniform1f(uniformSize, this.size);
 
 		const uniformColor = this.gl.getUniformLocation(this.program, 'u_color');
-		this.gl.uniform1f(uniformColor, this.color);
+		this.gl.uniform3f(uniformColor, this.color[0], this.color[1], this.color[2]);
 
 		// this.gl.enable(gl.BLEND);
 		// this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
