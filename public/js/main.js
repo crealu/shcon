@@ -86,7 +86,7 @@ function changeUniforms(key) {
   } else if (key == 'a') {
     program.axis = program.axis == 1.0 ? 0.0 : 1.0;
   } else if (key == 's') {
-    program.size = program.size == 0.5 ? 1.0 : 0.5;
+    program.size = program.size == 0.1 ? 0.3 : 0.1;
   } else if (key == 'c') {
     console.log('change color');
   }

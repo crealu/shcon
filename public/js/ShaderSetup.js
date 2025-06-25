@@ -122,8 +122,8 @@ class ShaderInputSetup extends ShaderSetup {
 	constructor(gl, canvas) {
 		super(gl, canvas);
 		this.offset = 2.0;
-		this.axis = 1.0;
-		this.size = 0.5;
+		this.axis = 0.0;
+		this.size = 0.1;
 		this.color = [0.0, 0.5, 1.0];
 
 		this.uOffset = '';
