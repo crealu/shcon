@@ -14,7 +14,7 @@ canvas.height = window.innerHeight;
 
 const gl = canvas.getContext('webgl');
 let standardSetup = new ShaderSetup(gl, canvas);
-// let inputSetup = new ShaderInputSetup(gl, canvas);
+let inputSetup = new ShaderInputSetup(gl, canvas);
 let program;
 
 function parseBoth(sn, text) {
@@ -107,55 +107,3 @@ pauseButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleReset);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);
-
-// class ShaderInputSetup extends ShaderSetup {
-//   constructor(gl, canvas) {
-//     super(gl, canvas);
-//     this.offset = 2.0;
-//     this.axis = 0.0;
-//     this.size = 0.5;
-//     this.color = [0.0, 0.5, 1.0];
-//   }
-
-//   initLocations() {
-//     this.gl.useProgram(this.program);
-
-//     const positionLocation = this.gl.getAttribLocation(this.program, "a_position");
-//     this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);  
-//     this.gl.enableVertexAttribArray(positionLocation);
-
-//     const uResolution = this.gl.getUniformLocation(this.program, 'u_resolution');
-//     this.gl.uniform3f(uResolution, this.canvas.width, this.canvas.height, 1.0);
-
-//     const uniformTime = this.gl.getUniformLocation(this.program, 'u_time');
-//     this.gl.uniform1f(uniformTime, this.time);
-
-//     const uniformOffset = this.gl.getUniformLocation(this.program, 'u_offset');
-//     this.gl.uniform1f(uniformOffset, this.offset);
-
-//     const uniformAxis = this.gl.getUniformLocation(this.program, 'u_axis');
-//     this.gl.uniform1f(uniformAxis, this.axis);    
-
-//     const uniformSize = this.gl.getUniformLocation(this.program, 'u_size');
-//     this.gl.uniform1f(uniformSize, this.size);    
-
-//     const uniformColor = this.gl.getUniformLocation(this.program, 'u_color');
-//     this.gl.uniform3f(uniformColor, this.color[0], this.color[1], this.color[2]);
-    
-//     this.uTime = uniformTime; 
-//   }
-
-//   render() {
-//     this.time += 0.01;
-
-//     this.gl.uniform1f(this.uTime, this.time);
-//     this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);  
-
-//     if (this.time >= this.limit) {
-//       this.pause();
-//       return;
-//     }
-
-//     this.id = window.requestAnimationFrame(() => this.render());
-//   }
-// }
