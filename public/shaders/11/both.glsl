@@ -24,7 +24,6 @@ uniform vec3 u_color;
 
 
 void main() {
-  // declarations
   vec2 view = gl_FragCoord.xy * u_offset - u_resolution.xy;
 
   float axis = u_resolution.y;
@@ -36,12 +35,14 @@ void main() {
   vec2 field = view / axis;
 
   float shape = length(field) - u_size;
-
+  
   vec3 color = vec3(u_color);
 
-  // operations
-  color += color * shape;
+  if (shape > 0.3) {
+    discard;
+  } else {
+    color += smoothstep(1.0, shape, 1.0);
+  }
 
-  // output
   gl_FragColor = vec4(color, 1.0);
 }
