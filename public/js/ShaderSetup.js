@@ -118,24 +118,4 @@ class ShaderSetup {
 	}
 }
 
-// class AlphaShader extends ShaderSetup {
-// 	constructor(gl, canvas) {
-// 		super(gl, canvas);
-// 	}
-
-// 	clear() {		
-// 		// this.gl.clearColor(0.0, 0.0, 0.0, 0.0);
-// 		// // this.gl.clearDepth(1.0);
-// 		// this.gl.enable(this.gl.DEPTH_TEST);
-// 		// this.gl.depthFunc(this.gl.LEQUAL);
-
-
-// 		gl.clearColor(0.0, 0.0, 0.0, 0.0);
-// 		gl.clear(gl.COLOR_BUFFER_BIT);
-// 		// gl.clearDepth(1.0);
-// 		gl.enable(gl.DEPTH_TEST);
-// 		gl.depthFunc(gl.LEQUAL);
-
-// 	}
-// }
 
