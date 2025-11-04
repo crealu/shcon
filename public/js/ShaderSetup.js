@@ -83,6 +83,7 @@ class ShaderSetup {
 
 	reset() {
 		this.time = 0;
+		this.pause();
 		this.render();
 	}
 
