@@ -108,11 +108,11 @@ function changeOption(event) {
 }
 
 function handlePause(event) {
-  theSetup.pause();
+  program.pause();
 }
 
 function handleReset(event) {
-  theSetup.reset();
+  program.reset();
 }
 
 selection.addEventListener('change', changeOption)
