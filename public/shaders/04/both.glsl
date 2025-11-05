@@ -12,6 +12,7 @@ precision mediump float;
 
 uniform vec3 u_resolution;
 uniform float u_time;
+uniform vec3 u_color;
 
 vec2 setOffset(float q, float x, float y) {
     vec2 offset = vec2(0.0);
