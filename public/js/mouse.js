@@ -143,7 +143,7 @@ function render() {
   gl.uniform1f(uniforms.time, time);
   // gl.uniform1f(uniforms.scheme, scheme);
   gl.uniform2f(uniforms.mouse, mouse.x, mouse.y);
-  gl.uniform3f(uniforms.color, col[0], col[1], col[2]);
+  gl.uniform3f(uniforms.color, 255.0, 0.0, 0.0);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   // gl.uniform1f(uniforms.cameraZ, cameraZ);
 
