@@ -77,7 +77,8 @@ float map(vec3 p, float ti) {
   // float frequency = 10.0;
   // float fluc = 0.5 * (1.0 + sin(2 * pi * 10.0 * u_time));
   
-  float size = 0.5 * sin(ti / 2.0);
+  float size = 0.09;
+  // float size = 0.5 * sin(ti / 2.0);
   float box = sdSphere(p, size);
 
   return box;
