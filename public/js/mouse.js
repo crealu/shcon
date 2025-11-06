@@ -20,7 +20,7 @@ let uniforms = {
   color: 0
 };
 
-let col = [255.0, 0.0, 0.0];
+let col = [1.0, 0.0, 0.0];
 
 let theProgram;
 let id;
@@ -142,8 +142,9 @@ function render() {
 
   gl.uniform1f(uniforms.time, time);
   // gl.uniform1f(uniforms.scheme, scheme);
+  const [r, g, b] = col;
   gl.uniform2f(uniforms.mouse, mouse.x, mouse.y);
-  gl.uniform3f(uniforms.color, 255.0, 0.0, 0.0);
+  gl.uniform3f(uniforms.color, r, g, b);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
   // gl.uniform1f(uniforms.cameraZ, cameraZ);
 
