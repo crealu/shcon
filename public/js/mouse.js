@@ -226,16 +226,17 @@ function handleLoad() {
 }
 
 function handleClick() {
-  uniforms.color = [255.0, 255.0, 0.0];
+  col = [1.0, 0.5, 0.0]
 }
 
 btn.addEventListener('click', handleButtonClick);
 canvas.addEventListener('mousedown', handleMouseDown);
 canvas.addEventListener('mousemove', handleMouseMove);
 canvas.addEventListener('mouseup', handleMouseUp);
+canvas.addEventListener('click', handleClick);
 window.addEventListener('keypress', handleKeyPress);
 window.addEventListener('load', handleLoad);
-window.addEventListener('click', handleClick);
+// window.addEventListener('click', handleClick);
 
 // redInput.addEventListener('input', () => {
 //   console.log(redInput.value);
