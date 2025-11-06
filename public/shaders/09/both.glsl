@@ -13,6 +13,7 @@ precision mediump float;
 uniform vec3 u_resolution;
 uniform float u_time;
 uniform vec2 u_mouse;
+uniform vec3 u_color;
 uniform float u_scheme;
 
 float sdSphere(vec3 p, float s) {
