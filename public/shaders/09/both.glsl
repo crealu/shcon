@@ -99,7 +99,7 @@ void main() {
   float t = 0.0;                          // total distance traveled
 
   // horizontal rotation camera
-  // ro.xy *= rot2D(-m.x + u_time / 10.0);
+  ro.xy *= rot2D(-m.x + u_time / 10.0);
   // rd.xy *= rot2D(-m.x + u_time / 10.0);
 
   // ro.xy *= rot2D(-m.y + u_time / 10.0);
@@ -114,6 +114,7 @@ void main() {
     vec3 p = ro + rd * t;       // position along the ray
 
     // p.zy *= rot2D(t * 0.2 + m.x);
+    p.xz *= rot2D(m.x);
     p.y += sin(t * (m.y + 1.0) * 0.5) * 0.35;
 
     float d = map(p, u_time);   // current distnace to scene
