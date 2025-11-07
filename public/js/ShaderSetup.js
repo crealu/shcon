@@ -126,11 +126,13 @@ class ShaderInputSetup extends ShaderSetup {
 		this.axis = 0.0;
 		this.size = 0.1;
 		this.color = [0.0, 0.5, 1.0];
+		this.mode = 0.0;
 
 		this.uOffset = '';
 		this.uAxis = '';
 		this.uSize = '';
 		this.uColor = '';
+		this.uMode = '';
 	}
 
 	initLocations() {
@@ -158,6 +160,8 @@ class ShaderInputSetup extends ShaderSetup {
 		this.uColor = this.gl.getUniformLocation(this.program, 'u_color');
 		this.gl.uniform3f(this.uColor, this.color[0], this.color[1], this.color[2]);
 
+		this.uMode = this.gl.getUniformLocation(this.program, 'u_mode');
+		this.gl.uniform1f(this.uMode, this.mode);
 		// this.gl.enable(gl.BLEND);
 		// this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 	}
@@ -169,6 +173,7 @@ class ShaderInputSetup extends ShaderSetup {
 		this.gl.uniform1f(this.uOffset, this.offset);
 		this.gl.uniform1f(this.uAxis, this.axis);
 		this.gl.uniform1f(this.uSize, this.size);
+		this.gl.uniform1f(this.uMode, this.mode);
 		this.gl.uniform3f(this.uColor, this.color[0], this.color[1], this.color[2]);
 
 		this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);  
