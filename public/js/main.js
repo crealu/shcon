@@ -5,6 +5,11 @@ const foreground = document.getElementsByClassName('foreground')[0];
 const controls = document.getElementsByClassName('controls')[0];
 const pauseButton = controls.children[0];
 const resetButton = controls.children[1];
+const info = document.getElementsByClassName('info')[0];
+
+info.style.display = 'none';
+info.style.position = 'absolute';
+info.style.color = 'white'
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -20,6 +25,9 @@ let program;
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
   program = sn == 11 || sn == 2 ? inputSetup : standardSetup;
+  if (sn == 2) {
+    info.style.display = 'block';
+  }
   start(program, shaders[0], shaders[1]);
 }
 
