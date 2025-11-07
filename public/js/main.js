@@ -100,6 +100,7 @@ function handleKeyPress(event) {
   } else {
     changeUniforms(event.key);
   }
+  changeMode(event);
 }
 
 function changeOption(event) {
