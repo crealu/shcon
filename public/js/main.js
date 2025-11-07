@@ -19,7 +19,7 @@ let program;
 
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
-  program = sn == 11 ? inputSetup : standardSetup;
+  program = sn == 11 || sn == 2 ? inputSetup : standardSetup;
   start(program, shaders[0], shaders[1]);
 }
 
@@ -124,6 +124,7 @@ function changeMode(event) {
       program.mode += 1.0;
     }
   }
+  console.log(program.mode);
 }
 
 selection.addEventListener('change', changeOption)
