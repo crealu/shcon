@@ -115,6 +115,16 @@ function handleReset(event) {
   program.reset();
 }
 
+function changeMode(event) {
+  if (event.key == 'm') {
+    if (program.mode == 3.0) {
+      program.mode = 0.0;
+    } else {
+      program.mode += 1.0;
+    }
+  }
+}
+
 selection.addEventListener('change', changeOption)
 iku.addEventListener('click', handleClick);
 pauseButton.addEventListener('click', handlePause);
