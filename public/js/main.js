@@ -21,13 +21,12 @@ const gl = canvas.getContext('webgl');
 let standardSetup = new ShaderSetup(gl, canvas);
 let inputSetup = new ShaderInputSetup(gl, canvas);
 let program;
+let shaderNumber = 0;
 
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
   program = sn == 11 || sn == 2 ? inputSetup : standardSetup;
-  if (sn == 2) {
-    info.style.display = 'block';
-  }
+  shaderNumber = sn;
   start(program, shaders[0], shaders[1]);
 }
 
@@ -77,6 +76,9 @@ function handleClick() {
   foreground.classList.add('vanish');
   canvas.classList.add('reveal');
   controls.classList.add('reveal');
+  if (shaderNumber == 2) {
+    info.style.display = 'block';
+  }
   program.render();
 }
 
