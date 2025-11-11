@@ -5,6 +5,7 @@ const foreground = document.getElementsByClassName('foreground')[0];
 const controls = document.getElementsByClassName('controls')[0];
 const pauseButton = controls.children[0];
 const resetButton = controls.children[1];
+const cancelButton = controls.children[2];
 const info = document.getElementsByClassName('info')[0];
 
 info.style.display = 'none';
@@ -82,8 +83,16 @@ function handleClick() {
   program.render();
 }
 
+function showForeground() {
+  foreground.classList.remove('vanish');
+}
+
 function displayCanvas() {    
   canvas.classList.add('reveal');
+}
+
+function hideCanvas() {
+  canvas.classList.remove('reveal');
 }
 
 function handleLoad() {
@@ -126,6 +135,15 @@ function handleReset(event) {
   program.reset();
 }
 
+function handleCancel(event) {
+  hideCanvas();
+  setTimeout(() => {
+    program.reset();
+    program.pause();
+    showForeground();
+  }, 400)
+}
+
 function changeMode(event) {
   if (event.key == 'm') {
     if (program.mode == 3.0) {
@@ -141,5 +159,6 @@ selection.addEventListener('change', changeOption)
 iku.addEventListener('click', handleClick);
 pauseButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleReset);
+cancelButton.addEventListener('click', handleCancel);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);
