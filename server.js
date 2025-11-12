@@ -16,10 +16,6 @@ app.get('/random', (req, res) => {
 	res.sendFile('random.html', root);
 });
 
-app.get('/dos', (req, res) => {
-	res.sendFile('dos.html', root);
-});
-
 app.get('/mouse', (req, res) => {
 	res.sendFile('mouse.html', root);
 });
