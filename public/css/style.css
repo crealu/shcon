@@ -147,6 +147,7 @@ body {
   left: 0px;
   right: 0px;
   top: calc(50% - 10px);
+  max-width: 200px;
   margin: 0 auto;
   border: none;
   background: none;
