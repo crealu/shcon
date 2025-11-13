@@ -1,5 +1,5 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
-const iku = document.getElementById('iku');
+const startBtn = document.getElementsByClassName('start-btn')[0];
 const selection = document.getElementsByClassName('selection')[0];
 const foreground = document.getElementsByClassName('foreground')[0];
 const controls = document.getElementsByClassName('controls')[0];
@@ -73,7 +73,6 @@ function start(setup, vs, fs) {
 }
 
 function handleClick() {
-  // iku.style.opacity = '0';
   foreground.classList.add('vanish');
   canvas.classList.add('reveal');
   controls.classList.add('reveal');
@@ -156,7 +155,7 @@ function changeMode(event) {
 }
 
 selection.addEventListener('change', changeOption)
-iku.addEventListener('click', handleClick);
+startBtn.addEventListener('click', handleClick);
 pauseButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleReset);
 cancelButton.addEventListener('click', handleCancel);
