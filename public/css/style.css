@@ -149,7 +149,7 @@ body {
 .controls {
   position: absolute;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
@@ -161,6 +161,13 @@ body {
   grid-gap: 10px;
   opacity: 0;
   z-index: 11;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .control-btn {
