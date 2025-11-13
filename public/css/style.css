@@ -158,7 +158,6 @@ body {
   left: 0px;
   right: 0px;
   bottom: 30px;
-  grid-gap: 10px;
   opacity: 0;
   z-index: 11;
 }
@@ -168,6 +167,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  grid-gap: 10px;
 }
 
 .control-btn {

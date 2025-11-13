@@ -3,9 +3,9 @@ const startBtn = document.getElementsByClassName('start-btn')[0];
 const selection = document.getElementsByClassName('selection')[0];
 const foreground = document.getElementsByClassName('foreground')[0];
 const controls = document.getElementsByClassName('controls')[0];
-const pauseButton = controls.children[0];
-const resetButton = controls.children[1];
-const cancelButton = controls.children[2];
+const pauseButton = document.getElementsByClassName('control-btn')[0];
+const resetButton = document.getElementsByClassName('control-btn')[1];
+const cancelButton = document.getElementsByClassName('control-btn')[2];
 const keyInfo = document.getElementsByClassName('key-info')[0];
 
 // if gl is initialized before setting canvas width and height, 
