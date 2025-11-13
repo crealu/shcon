@@ -1,8 +1,7 @@
 const canvas = document.getElementsByClassName('the-canvas')[0];
-const iku = document.getElementById('iku');
-const ikur = document.getElementsByClassName('ikur')[0];
+const startBtn = document.getElementsByClassName('start-btn')[0];
 
-iku.style.display = 'none';
+startBtn.style.display = 'none';
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
