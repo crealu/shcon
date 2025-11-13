@@ -135,7 +135,9 @@ function handleReset(event) {
 }
 
 function handleCancel(event) {
+  controls.classList.remove('reveal');
   hideCanvas();
+
   setTimeout(() => {
     program.reset();
     program.pause();
