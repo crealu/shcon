@@ -6,11 +6,7 @@ const controls = document.getElementsByClassName('controls')[0];
 const pauseButton = controls.children[0];
 const resetButton = controls.children[1];
 const cancelButton = controls.children[2];
-const info = document.getElementsByClassName('info')[0];
-
-info.style.display = 'none';
-info.style.position = 'absolute';
-info.style.color = 'white'
+const keyInfo = document.getElementsByClassName('key-info')[0];
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -77,7 +73,7 @@ function handleClick() {
   canvas.classList.add('reveal');
   controls.classList.add('reveal');
   if (shaderNumber == 2) {
-    info.style.display = 'block';
+    keyInfo.style.display = 'block';
   }
   program.render();
 }
