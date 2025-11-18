@@ -87,11 +87,11 @@ body {
 }
 
 .the-canvas {
-  opacity: 0;
   display: block;
-  transition: opacity 0.75s var(--cb-2);
-  z-index: 2;
   width: 100%;
+  transition: opacity 0.5s var(--cb-2);
+  opacity: 0;
+  z-index: 2;
 }
 
 .foreground {
