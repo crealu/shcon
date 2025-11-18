@@ -70,12 +70,20 @@ function start(setup, vs, fs) {
 
 function handleClick() {
   foreground.classList.add('vanish');
-  canvas.classList.add('reveal');
-  controls.classList.add('reveal');
+  // canvas.classList.add('reveal');
+  // controls.classList.add('reveal');
   if (shaderNumber == 2) {
     keyInfo.style.display = 'block';
   }
-  program.render();
+
+  setTimeout(() => {
+    program.render();
+    canvas.classList.add('reveal');
+  }, 350);
+
+  setTimeout(() => {
+    controls.classList.add('reveal');
+  }, 350);
 }
 
 function showForeground() {
