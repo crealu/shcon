@@ -76,6 +76,8 @@ function handleClick() {
     keyInfo.style.display = 'block';
   }
 
+  program.running = true;
+
   setTimeout(() => {
     program.render();
     canvas.classList.add('reveal');
@@ -131,11 +133,16 @@ function changeOption(event) {
 }
 
 function handlePause(event) {
-  program.pause();
-}
+  let source = ''
+  if (program.running) {
+    program.pause();
+    source = './img/play-btn.png';
+  } else {
+    program.resume();
+    source = './img/pause-btn.png';
+  }
 
-function handleResume() {
-  program.resume();
+  pauseButton.children[0].src = source;
 }
 
 function handleReset(event) {

@@ -11,6 +11,7 @@ class ShaderSetup {
 		this.time = 0.0;
 		this.limit = 12;
 		this.id = '';
+		this.running = false;
 	}
 
 	setup(vs, fs) {
@@ -84,10 +85,12 @@ class ShaderSetup {
 	reset() {
 		this.time = 0;
 		this.pause();
+		program.running = true;
 		this.render();
 	}
 
 	resume() {
+		this.running = true;
 		this.render();
 	}
 
@@ -105,6 +108,7 @@ class ShaderSetup {
 	}
 
 	pause() {
+		this.running = false;
 		window.cancelAnimationFrame(this.id);
 	}
 
