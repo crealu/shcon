@@ -185,6 +185,10 @@ body {
   cursor: pointer;
 }
 
+.btn-img {
+  width: 100%;
+}
+
 .key-info {
   position: relative;
   color: white;
