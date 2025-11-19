@@ -134,6 +134,10 @@ function handlePause(event) {
   program.pause();
 }
 
+function handleResume() {
+  program.resume();
+}
+
 function handleReset(event) {
   program.reset();
 }

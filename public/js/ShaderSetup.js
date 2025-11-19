@@ -87,6 +87,10 @@ class ShaderSetup {
 		this.render();
 	}
 
+	resume() {
+		this.render();
+	}
+
 	clear() {
 		// this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		// this.gl.clearDepth(1.0);
