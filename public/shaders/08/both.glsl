@@ -18,8 +18,7 @@ float box(vec2 p, vec2 b) {
   vec2 max1 = max(d, 0.0);
   float max2 = max(d.x, d.y);
   float min1 = min(max2, 0.0);
-  // return length(max1) + min1;
-  return length(max(d, d)) + min(max(d.x, d.y), 0.0);
+  return length(max1) + min1;
 }
 
 void main() {
@@ -36,7 +35,7 @@ void main() {
   // yellow color
   vec4 color = vec4(0.99, 0.87, 0.20, 1.0);
 
-  color *= b;
+  color *= smoothstep(0.1, 0.11, b);
 
   // for (int i = 0; i < 2; i++) {
   //   float x = 1.0 - (float(i) / 10.0);
