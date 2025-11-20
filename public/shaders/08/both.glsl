@@ -12,11 +12,6 @@ precision mediump float;
 
 uniform vec3 u_resolution;
 uniform float u_time;
-// uniform float u_moon;
-
-float circle(vec2 p, float r) {
-  return length(p) - r;
-}
 
 float box(vec2 p, vec2 b) {
   vec2 d = abs(p) - b;
@@ -26,7 +21,6 @@ float box(vec2 p, vec2 b) {
   return length(max1) + min1;
   // return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
 }
-
 
 void main() {
   vec2 view = 2.0 * gl_FragCoord.xy - u_resolution.xy;
@@ -38,7 +32,7 @@ void main() {
   float c = circle(field, radius);
 
   vec2 size = vec2(0.5);
-  // float b = box(field, size);
+  float b = box(field, size);
 
   // yellow color
   vec4 color = vec4(0.99, 0.87, 0.20, 1.0);
@@ -55,26 +49,15 @@ void main() {
   // color on inside (white until radius) and fade to transparency on outside
   // color -= c;
 
-  for (int i = 0; i < 2; i++) {
-    float x = 1.0 - (float(i) / 10.0);
-    float y = 1.0 - (float(i) / 10.0);    
-    vec2 offset = vec2(x, y);
-    field += offset;
-    float b = box(field, size);
-    color = mix(color, color / 2.0 , b);
-  }
+  color *= b;
 
-  // for (int i = 0; i < 5; i++) {
-  //   float circle = length(field) - radius;
-  //   float x = sin((float(i) / 5.0) * u_time);
-  //   float y = cos((float(i) / 5.0) * u_time);    
-
+  // for (int i = 0; i < 2; i++) {
+  //   float x = 1.0 - (float(i) / 10.0);
+  //   float y = 1.0 - (float(i) / 10.0);    
   //   vec2 offset = vec2(x, y);
-
-  //   field += offset / 2.0;
-  //   color -= abs(1.0 - circle);
-  //   circle = fract(circle) * 1.0;
-  //   color = mix(color, color1, circle);
+  //   field += offset;
+  //   float b = box(field, size);
+  //   color = mix(color, color * 2.0 , b);
   // }
 
   gl_FragColor = color;
