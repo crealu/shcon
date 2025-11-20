@@ -18,8 +18,8 @@ float box(vec2 p, vec2 b) {
   vec2 max1 = max(d, 0.0);
   float max2 = max(d.x, d.y);
   float min1 = min(max2, 0.0);
-  return length(max1) + min1;
-  // return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
+  // return length(max1) + min1;
+  return length(max(d, d)) + min(max(d.x, d.y), 0.0);
 }
 
 void main() {
@@ -29,25 +29,12 @@ void main() {
   vec2 field0 = field;
 
   float radius = 0.2;
-  float c = circle(field, radius);
 
   vec2 size = vec2(0.5);
   float b = box(field, size);
 
   // yellow color
   vec4 color = vec4(0.99, 0.87, 0.20, 1.0);
-
-  // color on outside and fade to nothing transparency at center
-  // color *= c;
-
-  // color on outside and fade to white at circle radius (0.2)
-  // color /= c;
-
-  // color on outside and stronger gradient but fade to transparency at center
-  // color += c;
-
-  // color on inside (white until radius) and fade to transparency on outside
-  // color -= c;
 
   color *= b;
 
