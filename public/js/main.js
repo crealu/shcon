@@ -22,7 +22,7 @@ let shaderNumber = 0;
 
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
-  program = sn == 11 || sn == 2 ? inputSetup : standardSetup;
+  program = sn == 11 || sn == 2 || sn == 8 ? inputSetup : standardSetup;
   shaderNumber = sn;
   start(program, shaders[0], shaders[1]);
 }

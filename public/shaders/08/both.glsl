@@ -12,6 +12,7 @@ precision mediump float;
 
 uniform vec3 u_resolution;
 uniform float u_time;
+uniform float u_mode;
 
 float box(vec2 p, vec2 b) {
   vec2 d = abs(p) - b;
@@ -35,16 +36,15 @@ void main() {
   // yellow color
   vec4 color = vec4(0.99, 0.87, 0.20, 1.0);
 
-  color *= smoothstep(0.1, 0.11, b);
-
-  // for (int i = 0; i < 2; i++) {
-  //   float x = 1.0 - (float(i) / 10.0);
-  //   float y = 1.0 - (float(i) / 10.0);    
-  //   vec2 offset = vec2(x, y);
-  //   field += offset;
-  //   float b = box(field, size);
-  //   color = mix(color, color * 2.0 , b);
-  // }
+  if (u_mode == 0.0) {
+    color *= smoothstep(0.05, 0.051, b);
+  } else if (u_mode == 1.0) {
+    color *= smoothstep(0.05, 0.05 + abs(0.059 - cos(u_time)), fract(b) * 3.0);
+  } else if (u_mode == 2.0) {
+    color *= smoothstep(0.05 * sin(u_time), 0.05 + abs(0.059 - cos(u_time)), fract(b) * 3.0);
+  } else {
+    color *= smoothstep(0.05, 0.051, fract(b) * 3.0);
+  }
 
   gl_FragColor = color;
 }
