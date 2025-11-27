@@ -7,6 +7,7 @@ const pauseButton = document.getElementsByClassName('control-btn')[0];
 const resetButton = document.getElementsByClassName('control-btn')[1];
 const cancelButton = document.getElementsByClassName('control-btn')[2];
 const keyInfo = document.getElementsByClassName('key-info')[0];
+const var1 = document.getElementsByClassName('var1-slider')[0];
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -174,10 +175,15 @@ function changeMode(event) {
   console.log(program.mode);
 }
 
+function handleChange(event) {
+  program.v1 = parseFloat(event.target.value);
+}
+
 selection.addEventListener('change', changeOption)
 startBtn.addEventListener('click', handleClick);
 pauseButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleReset);
 cancelButton.addEventListener('click', handleCancel);
+var1.addEventListener('input', handleChange);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);
