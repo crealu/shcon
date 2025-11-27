@@ -127,7 +127,7 @@ class ShaderSetup {
 	}
 }
 
-class ShaderInputSetup extends ShaderSetup {
+class InputSetup extends ShaderSetup {
 	constructor(gl, canvas) {
 		super(gl, canvas);
 		this.offset = 2.0;

@@ -16,7 +16,7 @@ canvas.height = window.innerHeight;
 
 const gl = canvas.getContext('webgl');
 let standardSetup = new ShaderSetup(gl, canvas);
-let inputSetup = new ShaderInputSetup(gl, canvas);
+let inputSetup = new InputSetup(gl, canvas);
 let program;
 let shaderNumber = 0;
 
