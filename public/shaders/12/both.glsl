@@ -16,10 +16,11 @@ precision mediump float;
 
 uniform vec3 u_resolution;
 uniform float u_time;
+uniform float u_var1;
 
 vec4 anim(vec4 o, vec2 i, float c, float s) {
   return
-    pow(.003 / 
+    pow(u_var1 / 
       abs(length(i - vec2(sin(c * .18 + s), cos(c * .19 + s * .19))))
       * 
       (
