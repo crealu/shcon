@@ -194,3 +194,44 @@ class InputSetup extends ShaderSetup {
 		this.id = window.requestAnimationFrame(() => this.render());
 	}
 }
+
+class VariableSetup extends ShaderSetup {
+	constructor(gl, canvas) {
+		super(gl, canvas);
+		this.v1 = 0.001;
+		this.uv1 = '';
+	}
+
+	initLocations() {
+		this.gl.useProgram(this.program);
+
+		const positionLocation = this.gl.getAttribLocation(this.program, "a_position");
+		this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);  
+		this.gl.enableVertexAttribArray(positionLocation);
+
+		const uResolution = this.gl.getUniformLocation(this.program, 'u_resolution');
+		this.gl.uniform3f(uResolution, this.canvas.width, this.canvas.height, 1.0);
+
+		this.uTime = this.gl.getUniformLocation(this.program, 'u_time');
+		this.gl.uniform1f(this.uTime, this.time);
+
+		this.uv1 = this.gl.getUniformLocation(this.program, 'u_var1');
+		this.gl.uniform1f(this.uv1, this.v1);
+	}
+
+	render() {
+		this.time += 0.01;
+
+		this.gl.uniform1f(this.uTime, this.time);
+		this.gl.uniform1f(this.uv1, this.v1);
+
+		this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);  
+
+		if (this.time >= this.limit) {
+			this.pause();
+			return;
+		}
+
+		this.id = window.requestAnimationFrame(() => this.render());
+	}
+}
