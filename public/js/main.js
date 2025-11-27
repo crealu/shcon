@@ -17,12 +17,15 @@ canvas.height = window.innerHeight;
 const gl = canvas.getContext('webgl');
 let standardSetup = new ShaderSetup(gl, canvas);
 let inputSetup = new InputSetup(gl, canvas);
+let variableSetup = new VariableSetup(gl, canvas);
 let program;
 let shaderNumber = 0;
 
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
-  program = sn == 11 || sn == 2 || sn == 8 ? inputSetup : standardSetup;
+  program = sn == 11 || sn == 2 || sn == 8 ? inputSetup 
+          : sn == 12 ? variableSetup
+          : standardSetup;
   shaderNumber = sn;
   start(program, shaders[0], shaders[1]);
 }
