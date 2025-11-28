@@ -20,6 +20,10 @@ app.get('/mouse', (req, res) => {
 	res.sendFile('mouse.html', root);
 });
 
+app.get('/map', (req, res) => {
+	res.sendFile('map.html', root);
+});
+
 app.post('/mouse-shaders', (req, res) => {
 	res.sendFile('shaders/09/both.glsl', root);
 });
