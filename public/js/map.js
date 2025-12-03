@@ -71,12 +71,6 @@ const highlightLayer = {
 			}
 		`;
 
-		// const fragmentSource = `
-		// 	void main() {
-		// 		gl_FragColor = vec4(, 0.5);
-		// 	}
-		// `;
-
 		const fragmentSource = fragmentSources[0].glsl;
 
 		const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -118,3 +112,12 @@ const highlightLayer = {
 map.on('load', () => {
 	map.addLayer(highlightLayer);
 });
+
+async function handlePageLoad() {
+	const res = await fetch('/get-token');
+	const json = await res.json();
+
+	console.log(json);
+}
+
+window.addEventListener('load', handlePageLoad);
