@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2hjb25yZXMiLCJhIjoiY201eGFpaGtrMDA1dDJucHRodnZ4aDRvayJ9.hhgg_FcQRxFw3F7CUZPuBg';
+mapboxgl.accessToken = '';
 
 const map = new mapboxgl.Map({
 	container: 'map',
@@ -40,6 +40,24 @@ let positions = [
 
 let time = 0.0;
 
+let fragmentSources = [
+	{
+		glsl: `
+			void main() {
+				gl_FragColor = vec4(1.0, 0.0, 1.0, 0.5);
+			}
+		`
+	},
+	{
+		glsl: `
+			void main() {
+				vec3 c = vec3(1.0, 0.0, 1.0);
+				gl_FragColor = vec4(c, 0.5);
+			}
+		`
+	}
+]
+
 const highlightLayer = {
 	id: 'highlight',
 	type: 'custom',
@@ -53,11 +71,13 @@ const highlightLayer = {
 			}
 		`;
 
-		const fragmentSource = `
-			void main() {
-				gl_FragColor = vec4(1.0, 0.0, 1.0, 0.5);
-			}
-		`;
+		// const fragmentSource = `
+		// 	void main() {
+		// 		gl_FragColor = vec4(, 0.5);
+		// 	}
+		// `;
+
+		const fragmentSource = fragmentSources[0].glsl;
 
 		const vertexShader = gl.createShader(gl.VERTEX_SHADER);
 		gl.shaderSource(vertexShader, vertexSource);
