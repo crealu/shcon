@@ -14,21 +14,6 @@ const map = new mapboxgl.Map({
 	projection: 'mercator'
 });
 
-// const helsinki = mapaboxgl.MercatorCoordinate.fromLngLat({
-// 	lng: 25.004,
-// 	lat: 60.239
-// })
-
-// const berlin = mapboxgl.MercatorCoordinate.fromLngLat({
-// 	lng: 13.403,
-// 	lat: 52.562
-// });
-
-// const kyiv = mapboxgl.MercatorCoordinate.fromLngLat({
-// 	lng: 30.498,
-// 	lat: 50.541
-// });
-
 const helsinki = mapboxgl.MercatorCoordinate.fromLngLat({
 	lng: 25.004,
 	lat: 60.239
@@ -40,14 +25,9 @@ const berlin = mapboxgl.MercatorCoordinate.fromLngLat({
 });
 
 const kyiv = mapboxgl.MercatorCoordinate.fromLngLat({
-	lng: 0.0,
-	lat: 0.0
+	lng: 30.498,
+	lat: 50.541
 });
-
-// const place = mapboxgl.MercatorCoordinate.fromLngLat({
-// 	lng: 0.0,
-// 	lat: 0.0
-// });
 
 let positions = [
 	helsinki.x,
@@ -74,11 +54,8 @@ const highlightLayer = {
 		`;
 
 		const fragmentSource = `
-			uniform float u_time;
-
 			void main() {
-		    vec3 color = vec3(1.0, 0.5, 0.5);
-				gl_FragColor = vec4(color, 0.5);
+				gl_FragColor = vec4(1.0, 0.0, 1.0, 0.5);
 			}
 		`;
 
@@ -96,41 +73,24 @@ const highlightLayer = {
 		gl.linkProgram(this.program);
 
 		this.aPos = gl.getAttribLocation(this.program, 'a_position');
-		gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
-		gl.enableVertexAttribArray(this.aPos);
-
-		// this.uMatrix = gl.getUniformLocation(this.program, 'u_matrix');
-		// gl.uniformMatrix4fv(this.uMatrix, false, matrix);
 
 		this.buffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-
-		gl.useProgram(this.program);
-		gl.enable(gl.BLEND);
-		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 	},
 
-	render: function(gl, matrix, time) {
-		time += 0.01;
-
+	render: function(gl, matrix) {
+		gl.useProgram(this.program);
 		gl.uniformMatrix4fv(
 			gl.getUniformLocation(this.program, 'u_matrix'),
+			false,
 			matrix
 		);
-
-		gl.uniform1f(
-			gl.getUniformLocation(this.program, 'u_time'), time
-		);
-
-		// gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-		// gl.enableVertexAttribArray(this.aPos);
-		// gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
-		console.log(time);
-
-		this.render_id = window.requestAnimationFrame(() => this.render(gl, matrix, time));
-
-
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+		gl.enableVertexAttribArray(this.aPos);
+		gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
+		gl.enable(gl.BLEND);
+		gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
 	}
 }
