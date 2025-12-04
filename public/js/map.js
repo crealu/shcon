@@ -1,3 +1,15 @@
+let vertexSources = [
+	{
+		glsl: `
+			uniform mat4 u_matrix;
+			attribute vec2 a_position;
+			void main() {
+				gl_Position = u_matrix * vec4(a_position, 0.0, 1.0);
+			}
+		`
+	}
+]
+
 let fragmentSources = [
 	{
 		glsl: `
@@ -8,6 +20,9 @@ let fragmentSources = [
 	},
 	{
 		glsl: `
+
+			uniform float u_time;
+			
 			void main() {
 				vec3 c = vec3(1.0, 0.0, 1.0);
 				gl_FragColor = vec4(c, 0.5);
@@ -15,6 +30,8 @@ let fragmentSources = [
 		`
 	}
 ]
+
+let time = 0.0;
 
 function initializeMapbox() {
 	const map = new mapboxgl.Map({
@@ -60,15 +77,8 @@ function initializeMapbox() {
 		type: 'custom',
 
 		onAdd: function(map, gl) {
-			const vertexSource = `
-				uniform mat4 u_matrix;
-				attribute vec2 a_position;
-				void main() {
-					gl_Position = u_matrix * vec4(a_position, 0.0, 1.0);
-				}
-			`;
-
-			const fragmentSource = fragmentSources[0].glsl;
+			const vertexSource = vertexSources[0].glsl;
+			const fragmentSource = fragmentSources[1].glsl;
 
 			const vertexShader = gl.createShader(gl.VERTEX_SHADER);
 			gl.shaderSource(vertexShader, vertexSource);
@@ -91,13 +101,20 @@ function initializeMapbox() {
 		},
 
 		render: function(gl, matrix) {
+			time += 0.01;
 			gl.useProgram(this.program);
-			gl.uniformMatrix4fv(
-				gl.getUniformLocation(this.program, 'u_matrix'),
-				false,
-				matrix
-			);
+
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+
+			// gl.uniformMatrix4fv(this.uMatrix, false, matrix);
+			// gl.uniform1f(this.uTime, time);
+
+			this.uMatrix = gl.getUniformLocation(this.program, 'u_matrix');
+			gl.uniformMatrix4fv(this.uMatrix, false, matrix);
+
+			this.uTime = gl.getUniformLocation(this.program, 'u_time');
+			gl.uniform1f(this.uTime, time);
+
 			gl.enableVertexAttribArray(this.aPos);
 			gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
 			gl.enable(gl.BLEND);
