@@ -22,7 +22,7 @@ let fragmentSources = [
 		glsl: `
 
 			uniform float u_time;
-			
+
 			void main() {
 				vec3 c = vec3(1.0, 0.0, 1.0);
 				gl_FragColor = vec4(c, 0.5);
@@ -105,9 +105,6 @@ function initializeMapbox() {
 			gl.useProgram(this.program);
 
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-
-			// gl.uniformMatrix4fv(this.uMatrix, false, matrix);
-			// gl.uniform1f(this.uTime, time);
 
 			this.uMatrix = gl.getUniformLocation(this.program, 'u_matrix');
 			gl.uniformMatrix4fv(this.uMatrix, false, matrix);
