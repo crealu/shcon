@@ -20,6 +20,7 @@ let fragmentSources = [
 	},
 	{
 		glsl: `
+			precision mediump float;
 
 			uniform float u_time;
 
