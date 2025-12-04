@@ -25,14 +25,14 @@ let fragmentSources = [
 			uniform float u_time;
 
 			void main() {
-				vec3 c = vec3(1.0, 0.0, 1.0);
+				vec3 c = vec3(1.0, 0.0, u_time);
 				gl_FragColor = vec4(c, 0.5);
 			}
 		`
 	}
 ]
 
-let time = 0.0;
+let time = 1.0;
 let running = true;
 
 function initializeMapbox() {
