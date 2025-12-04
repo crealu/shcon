@@ -33,6 +33,7 @@ let fragmentSources = [
 ]
 
 let time = 0.0;
+let running = true;
 
 function initializeMapbox() {
 	const map = new mapboxgl.Map({
@@ -118,6 +119,11 @@ function initializeMapbox() {
 			gl.enable(gl.BLEND);
 			gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
+
+			if (!running) {
+				console.log('Program stopped');
+				console.log(`Time: ${time}`)
+			}
 		}
 	}
 
@@ -134,4 +140,11 @@ async function handlePageLoad() {
 	initializeMapbox();
 }
 
+function handleKeyDown(event) {
+	if (event.key == 'p') {
+		running = false;
+	}
+}
+
 window.addEventListener('load', handlePageLoad);
+window.addEventListener('keydown', handleKeyDown);
