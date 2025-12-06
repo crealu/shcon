@@ -25,7 +25,12 @@ let fragmentSources = [
 			uniform float u_time;
 
 			void main() {
-				vec3 c = vec3(1.0, 0.0, u_time);
+
+				vec2 shape = vec2(1.0, 1.0);
+				vec3 c = vec3(1.0, 0.0, sin(u_time));
+
+				c *= length(shape) + 0.5;
+
 				gl_FragColor = vec4(c, 0.5);
 			}
 		`
@@ -119,6 +124,9 @@ function initializeMapbox() {
 			gl.enable(gl.BLEND);
 			gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
+
+			// this line breaks the computer
+			// map.triggerRepaint()
 
 			if (!running) {
 				console.log('Program stopped');
