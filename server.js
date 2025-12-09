@@ -2,8 +2,8 @@ const express = require('express');
 const port = process.env.PORT || 9800;
 const app = express();
 
-const dotenv = require('dotenv');
-dotenv.config({ path: '.env' });
+// const dotenv = require('dotenv');
+// dotenv.config({ path: '.env' });
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
