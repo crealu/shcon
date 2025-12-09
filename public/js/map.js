@@ -34,6 +34,27 @@ let fragmentSources = [
 				gl_FragColor = vec4(c, 0.5);
 			}
 		`
+	},
+	{
+		glsl: `
+			precision mediump float;
+
+			uniform vec3 u_resolution;
+			uniform float u_time;
+
+			void main() {
+				vec2 view = 2.0 * gl_FragCoord.xy - u_resolution.xy;
+				float axis = u_resolution.y;
+				vec2 field = view / axis;
+
+				float shape = length(field) - 0.5;
+				vec3 c = vec3(1.0, 0.0, sin(u_time));
+
+				c *= smoothstep(0.5, 0.51, shape);
+
+				gl_FragColor = vec4(c, 0.5);
+			}
+		`
 	}
 ]
 
@@ -92,7 +113,7 @@ function initializeMapbox() {
 
 		onAdd: function(map, gl) {
 			const vertexSource = vertexSources[0].glsl;
-			const fragmentSource = fragmentSources[1].glsl;
+			const fragmentSource = fragmentSources[2].glsl;
 
 			const vertexShader = gl.createShader(gl.VERTEX_SHADER);
 			gl.shaderSource(vertexShader, vertexSource);
@@ -125,6 +146,9 @@ function initializeMapbox() {
 
 			this.uTime = gl.getUniformLocation(this.program, 'u_time');
 			gl.uniform1f(this.uTime, time);
+
+			this.uResolution = gl.getUniformLocation(this.program, 'u_resolution');
+			gl.uniform3f(this.uResolution, 600, 500, 1.0);
 
 			gl.enableVertexAttribArray(this.aPos);
 			gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, false, 0, 0);
