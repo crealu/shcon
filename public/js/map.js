@@ -70,13 +70,20 @@ function initializeMapbox() {
 		lat: 50.541
 	});
 
+	const budapest = mapboxgl.MercatorCoordinate.fromLngLat({
+		lng: 47.56,
+		lat: 18.99
+	});
+
 	let positions = [
 		helsinki.x,
 		helsinki.y,
 		berlin.x,
 		berlin.y,
 		kyiv.x,
-		kyiv.y
+		kyiv.y,
+		budapest.x,
+		budapest.y
 	];
 
 	const highlightLayer = {
@@ -138,6 +145,18 @@ function initializeMapbox() {
 	map.on('load', () => {
 		map.addLayer(highlightLayer);
 	});
+
+	map.on('click', (event) => {
+		let longitude = event.lngLat.lng;
+		let latitude = event.lngLat.lat;
+		const location = mapboxgl.MercatorCoordinate.fromLngLat({
+			lng: longitude,
+			lat: latitude
+		});
+
+		console.log(location);
+		console.dir(location);
+	})
 }
 
 async function handlePageLoad() {
