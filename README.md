@@ -2,9 +2,7 @@
 A project that explores GLSL programming and various shaders in context.
 
 <br>
-<img src="./public/img/capture1.png" width="50%">
-<img src="./public/img/capture3.png" width="50%">
-<br>
+<img src="./public/img/capture1.png" width="300">
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Explore Shcon</a>
 
 &nbsp;
@@ -40,6 +38,9 @@ npm run dev
 ```
 localhost:9800
 ```
+
+<br>
+<img src="./public/img/capture3.png" width="300">
 
 &nbsp;
 ## Features
