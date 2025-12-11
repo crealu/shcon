@@ -1,24 +1,47 @@
 # Shcon
-A project exploring GLSL shader programming and a consideration on its implementation in user intefaces and experiences.
+A project exploring GLSL shader programming in various contexts.
 
-<a href="https://shcon-902b612ebe5d.herokuapp.com/random">Live</a>
 <br>
 <img src="./public/img/capture1.png" width="300">
-
+<br>
+<a href="https://shcon-902b612ebe5d.herokuapp.com/random">Explore Shcon</a>
 
 &nbsp;
-## Prerequisites
-Node.js (v18.16.0 or greater) installed on local machine.
+## Requirements
+Node.js 18+
+```
+node -v
+```
+
+npm 10+
+```
+npm -v
+```
 
 &nbsp;
 ## Installation & Setup
-1. Clone the repository.
-2. Navigate to cloned directory and run `npm i`
-3. In a terminal window, run `npm run dev`
-4. Open browser window to localhost:9800
+1. Clone repository
+```
+gh repo clone crealu/shcon
+```
+
+2. In project folder install dependencies
+```
+npm install
+```
+
+3. Start development server
+```
+npm run dev
+```
+
+4. Navigate to localhost in browser window
+```
+localhost:9800
+```
 
 &nbsp;
-## Featues
+## Features
 Animation start and stop controlled by user input.
 - 'J' to start (and speed up)
 - 'P' to stop (and slow down)
@@ -41,11 +64,9 @@ Application endpoints that serve pages with various functionality
 
 &nbsp;
 ## ShaderSetup Documentation
-This project includes a custom class, ShaderSetup, designed to simplify the setup, creation, and management of WebGL shader programs renderd on an HTML canvas.
-It handles shader compilation, buffer initialization, and rendering on an HTML canvas.
-
-
+Included in this project is a custom class, ShaderSetup, designed to simplify the setup, execution, and management of WebGL shader programs.
+It handles shader compilation, buffer initialization, and rendering in each respective context.
 
 &nbsp;
 ## Contributing
-Want to contribute? Please fork the repo and submit a pull request.
+Want to contribute? Please fork the repository and submit a pull request.
