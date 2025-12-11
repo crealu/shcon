@@ -91,20 +91,13 @@ function initializeMapbox() {
 		lat: 50.541
 	});
 
-	const budapest = mapboxgl.MercatorCoordinate.fromLngLat({
-		lng: 47.56,
-		lat: 18.99
-	});
-
 	let positions = [
 		helsinki.x,
 		helsinki.y,
 		berlin.x,
 		berlin.y,
 		kyiv.x,
-		kyiv.y,
-		budapest.x,
-		budapest.y
+		kyiv.y
 	];
 
 	const highlightLayer = {
