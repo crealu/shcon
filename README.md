@@ -1,8 +1,9 @@
 # Shcon
-A project exploring GLSL shader programming in various contexts.
+A project that explores GLSL programming and various shaders in context.
 
 <br>
-<img src="./public/img/capture1.png" width="300">
+<img src="./public/img/capture1.png" width="50%">
+<img src="./public/img/capture3.png" width="50%">
 <br>
 <a href="https://shcon-902b612ebe5d.herokuapp.com/random">Explore Shcon</a>
 
@@ -42,25 +43,24 @@ localhost:9800
 
 &nbsp;
 ## Features
-Animation start and stop controlled by user input.
-- 'J' to start (and speed up)
-- 'P' to stop (and slow down)
 
-Application endpoints that serve pages with various functionality
-<br>
-<a href="https://shcon-902b612ebe5d.herokuapp.com/random">Random</a>
-- `/random` displays a randomly chosen shader animation from the shaders folder 
-<img src="./public/img/capture2.png" width="300">
-
-&nbsp;
-<a href="https://shcon-902b612ebe5d.herokuapp.com/mouse">Mouse</a>
-- `/mouse` for mouse click interactivity
-<img src="./public/img/capture3.png" width="300">
+- Selectable shader programs
+- Randomly regenerating drawings
+- Animation start, stop and reset
+- Drawing mode toggle
+- Keyboard input
+- Mouse input
+- Page menu navigation
+- Custom ShaderSetup class definition
 
 &nbsp;
-<a href="https://shcon-902b612ebe5d.herokuapp.com/Dos">Dos</a>
-- `/dos` renders animations in two separate canvases
-<img src="./public/img/capture4.png" width="300">
+## Contexts
+
+### HTML Canvas
+Program renders and animates within a standard HTML canvas element.
+
+### MapboxGL Custom Layer
+Program renders as a fill for custom MapboxGL layer.
 
 &nbsp;
 ## ShaderSetup Documentation
