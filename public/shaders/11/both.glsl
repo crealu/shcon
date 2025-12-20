@@ -22,7 +22,6 @@ uniform float u_axis;
 uniform float u_size;
 uniform vec3 u_color;
 
-
 void main() {
   vec2 view = gl_FragCoord.xy * u_offset - u_resolution.xy;
 
@@ -37,6 +36,8 @@ void main() {
   float shape = length(field) - u_size;
   
   vec3 color = vec3(u_color);
+
+  field.x += u_offset;
 
   if (shape > 0.3) {
     discard;
