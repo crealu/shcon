@@ -8,6 +8,8 @@ const resetButton = document.getElementsByClassName('control-btn')[1];
 const cancelButton = document.getElementsByClassName('control-btn')[2];
 const keyInfo = document.getElementsByClassName('key-info')[0];
 const var1 = document.getElementsByClassName('var1-slider')[0];
+const shader11UI = document.querySelector('.shader-11-ui');
+const offsetInput = document.querySelector('.offset-input');
 
 // if gl is initialized before setting canvas width and height, 
 // the canvas will visually be cut off at the screens halfway point
@@ -22,12 +24,20 @@ let variableSetup = new VariableSetup(gl, canvas);
 let program;
 let shaderNumber = 0;
 
+shader11UI.style.display = 'none';
+function displayShader11UI() {
+  shader11UI.style.display = 'block';
+}
+
 function parseBoth(sn, text) {
   let shaders = text.split('//**');
   program = sn == 11 || sn == 2 || sn == 8 ? inputSetup 
           : sn == 12 ? variableSetup
           : standardSetup;
   shaderNumber = sn;
+  if (shaderNumber == 11) {
+    displayShader11UI();
+  }
   start(program, shaders[0], shaders[1]);
 }
 
@@ -179,11 +189,16 @@ function handleChange(event) {
   program.v1 = parseFloat(event.target.value);
 }
 
+function handleOffset() {
+  program.v1 = parseFloat(event.target.value);
+}
+
 selection.addEventListener('change', changeOption)
 startBtn.addEventListener('click', handleClick);
 pauseButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleReset);
 cancelButton.addEventListener('click', handleCancel);
+offsetInput.addEventListener('input', handleOffset);
 var1.addEventListener('input', handleChange);
 window.addEventListener('load', handleLoad);
 window.addEventListener('keydown', handleKeyPress);
